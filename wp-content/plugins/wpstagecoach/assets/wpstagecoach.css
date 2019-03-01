@@ -1,0 +1,325 @@
+.wpstagecoach-header {
+    display: -webkit-flex;
+    /* Safari */
+    display: flex;
+    -webkit-flex-flow: row wrap;
+    flex-flow: row wrap;
+    background: #343f49;
+    color: #fff;
+    padding: 0 20px 20px;
+}
+.wpstagecoach-branding h1 {
+    text-indent: -999999px;
+}
+.wpstagecoach-header img {
+    margin-top: 17px;
+    margin-right: 12px;
+}
+.wpstagecoach-header .notice-error, .wpstagecoach-header div.error {
+    clear: both;
+}
+.wpstagecoach-header .wpstagecoach-branding, .wpstagecoach-header .wpstagecoach-cobranding {
+    -webkit-flex: 1;
+    flex: 1;
+    min-width: 300px;
+}
+.wpstagecoach-header .wpstagecoach-cobranding img {
+    max-height: 60px;
+    width: auto;
+    float: left;
+}
+.wpstagecoach-wrapper .wpstagecoach-textinfo {
+    font-size: 1.3em;
+}
+.wpstagecoach-textsmaller {
+    font-size: 0.8em;
+}
+#overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1001;
+    background: rgba(0, 0, 0, .3);
+}
+#files, #tables {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-right: 20px;
+}
+#files h4 {
+    margin-top: 0;
+}
+.wpstagecoach-error {
+    background: none repeat scroll 0 0 #FFFFFF;
+    padding: 8px;
+    border-left: 4px solid #DD3D36;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+}
+.wpstagecoach-warn {
+    background: none repeat scroll 0 0 #FFFFEE;
+    padding: 8px;
+    border-left: 4px solid #FFFF00;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+}
+.wpstagecoach-info {
+    background: none repeat scroll 0 0 #F8FFF8;
+    padding: 8px;
+    border-left: 4px solid #00FF00;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+}
+#wpstagecoach-import-tabs ul {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 0;
+    padding-left: 10px;
+}
+#wpstagecoach-import-tabs li {
+    display: inline-block;
+}
+#wpstagecoach-import-tabs li a {
+    display: inline-block;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 24px;
+    background: none repeat scroll 0 0 #e4e4e4;
+    border: 1px solid #ccc;
+    color: #555;
+    margin: 0px 4px -7px 0;
+    padding: 4px 14px 6px;
+    text-decoration: none;
+}
+#wpstagecoach-import-tabs li a.selected {
+    background-color: #f1f1f1;
+    border-bottom-color: #f1f1f1;
+}
+.wpstagecoach-indented-list {
+    margin: 0;
+}
+.wpstagecoach-indented-list li {
+    margin-left: 2em;
+    list-style-type: none;
+}
+.wpstagecoach-error li {
+    margin-left: 2em
+}
+#wpstagecoach-content:after {
+    display: table;
+    content: '';
+    clear: both;
+}
+#wpstagecoach-content {
+    position: relative;
+}
+#wpstagecoach-content-wrap {
+    width: 70%;
+    float: left;
+}
+#wpstagecoach-aside {
+    width: 20%;
+    position: relative;
+    margin: 10px;
+    padding: 2% 2% 50px 2%;
+    text-align: center;
+    color: #ffffff;
+    background: #343f49;
+    float: right;
+}
+#wpstagecoach-aside a {
+    color: #fc6345;
+}
+#wpstagecoach-aside h2, #wpstagecoach-aside h3, #wpstagecoach-aside h4 {
+    color: #ffffff;
+}
+#wpstagecoach-aside h4 {
+    margin-bottom: 0;
+}
+#wpstagecoach-aside ul {
+    margin-top: 0;
+}
+#wpstagecoach-aside:after {
+    display: block;
+    content: '';
+    width: 66px;
+    height: 66px;
+    background: url('sidebar-medallion.png') no-repeat;
+    position: absolute;
+    left: 50%;
+    margin-left: -33px;
+    bottom: -33px;
+}
+#wpstagecoach-settings .form-table {
+    clear: none;
+}
+@media screen and (max-width: 780px) {
+    #wpstagecoach-aside, #wpstagecoach-content-wrap {
+        position: relative;
+        width: 95%;
+        margin: 20px 0;
+    }
+}
+.more-info {
+    display: block;
+    font-style: italic;
+}
+.wpstagecoach-missing-files-from-tar th {
+    border-bottom: 1px solid #999;
+    text-align: left;
+}
+.wpstagecoach-feedback {
+    position: relative;
+}
+.wpstagecoach-waiting {
+    position: relative;
+    min-height: 60px;
+}
+.wpstagecoach-waiting:before {
+    content: 'Hold your horses!  This might take a few minutes.';
+    display: block;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 500;
+}
+.wpstagecoach-feedback.waiting:after, .wpstagecoach-waiting:after {
+    display: block;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('wagon-wheel-small.gif') no-repeat center center rgba(255, 255, 255, .6);
+}
+#wpstagecoach-advanced-create-mysql-rows-per-step-form {
+    margin-left: 3em;
+    margin-bottom: 1em;
+}
+#wpstagecoach-advanced-create-mysql-custom-iterations-form {
+    margin-left: 3em;
+    margin-bottom: 1em;
+}
+#wpstagecoach-advanced-create-skip-directories-form {
+    margin-left: 3em;
+    margin-bottom: 1em;
+}
+#wpstagecoach-advanced-create-mysql-bypass-tables-form {
+    margin-left: 3em;
+    margin-bottom: 1em;
+}
+.wpstagecoach-waiting:after {
+    background-color: #F5F5F5
+}
+#feedback-result.result {
+    font-size: 1.3em;
+    background: none repeat scroll 0 0 #F8FFF8;
+    padding: 8px;
+    border-left: 4px solid #00FF00;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+    margin: 15px 0;
+}
+.wp-stagecoach_page_wpstagecoach_settings .form-table th {
+    width: 250px;
+}
+.wp-stagecoach_page_wpstagecoach_settings .form-table th label {
+    position: relative;
+}
+/*For tooltip target element that has set class="tooltip" */
+
+a.tooltip {
+    outline: none;
+    text-decoration: none;
+    position: relative;
+    top: 3px;
+    left: 2px;
+    color: #999;
+}
+a.tooltip i {
+    width: 18px;
+    height: 18px;
+    font-size: 18px;
+}
+a.tooltip strong {
+    line-height: 30px;
+}
+a.tooltip > span.open {
+    width: 300px;
+    padding: 10px 20px;
+    margin-top: 0;
+    margin-left: -120px;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 10;
+    position: absolute;
+    font-size: 14px;
+    font-weight: 400;
+    font-style: normal;
+    border-radius: 3px;
+    box-shadow: 2px 2px 2px #999;
+    -webkit-transition-property: opacity, margin-top, visibility, margin-left;
+    -webkit-transition-duration: 0.4s, 0.3s, 0.4s, 0.3s;
+    -webkit-transition-timing-function: ease-in-out, ease-in-out, ease-in-out, ease-in-out;
+    transition-property: opacity, margin-top, visibility, margin-left;
+    transition-duration: 0.4s, 0.3s, 0.4s, 0.3s;
+    transition-timing-function: ease-in-out, ease-in-out, ease-in-out, ease-in-out;
+}
+/*a.tooltip > span:hover,*/
+
+a.tooltip:hover > span.open {
+    opacity: 1;
+    text-decoration: none;
+    visibility: visible;
+    overflow: visible;
+    margin-top: 30px;
+    display: inline;
+    margin-left: -78px;
+}
+a.tooltip span.open b {
+    width: 15px;
+    height: 15px;
+    margin-left: 40px;
+    margin-top: -19px;
+    display: block;
+    position: absolute;
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    -webkit-box-shadow: inset -1px 1px 0 #fff;
+    -moz-box-shadow: inset 0 1px 0 #fff;
+    -o-box-shadow: inset 0 1px 0 #fff;
+    box-shadow: inset 0 1px 0 #fff;
+    display: none\0/;
+    *display: none;
+}
+a.tooltip > span.open {
+    color: #000000;
+    background: #FBF5E6;
+    background: -webkit-linear-gradient(top, #FBF5E6, #FFFFFF);
+    background: linear-gradient(top, #FBF5E6, #FFFFFF);
+    border: 1px solid #AAAAAA;
+}
+a.tooltip span.open b {
+    background: #FBF5E6;
+    border-top: 1px solid #AAAAAA;
+    border-right: 1px solid #AAAAAA;
+}
+.wpstagecoach-lock-icon {
+    text-decoration: none;
+    position: relative;
+    top: 3px;
+    color: green;
+    font-size: 1.0em;
+    line-height: 1.2;
+}
+/*form validation error*/
+
+span.comments-error.wpstagecoach-error {
+    margin: 10px 0;
+    float: left;
+    width: 100%;
+    max-width: 380px;
+}
+#wpsc-happiness-form a#submit-feedback {
+    clear: both;
+    float: left;
+}

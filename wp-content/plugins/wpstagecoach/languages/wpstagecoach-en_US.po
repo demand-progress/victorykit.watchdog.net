@@ -1,0 +1,2511 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Stagecoach\n"
+"POT-Creation-Date: 2015-05-04 14:57-0800\n"
+"PO-Revision-Date: 2015-05-04 14:58-0800\n"
+"Last-Translator: Morgan <morgan@wpalchemists.com>\n"
+"Language-Team: Morgan <morgan@wpalchemists.com>\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.7.6\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: includes/wpsc-create.inc.php:87
+msgid "Step 1: Setting up and doing sanity checks."
+msgstr ""
+
+#: includes/wpsc-create.inc.php:91
+msgid "Sorry, you may only use alphanumeric characters in the subdomain name."
+msgstr ""
+
+#: includes/wpsc-create.inc.php:97
+msgid "Sorry, you must include letters in the subdomain name."
+msgstr ""
+
+#: includes/wpsc-create.inc.php:104
+msgid ""
+"You must specify a user and a password if you want to password-protect your "
+"staging site."
+msgstr ""
+
+#: includes/wpsc-create.inc.php:214
+msgid "Okay, the staging site name is good, and we know where to install it."
+msgstr ""
+
+#: includes/wpsc-create.inc.php:216
+msgid ""
+"We did not get a valid staging server from the conductor. Please contact WP "
+"Stagecoach support with the following information:"
+msgstr ""
+
+#: includes/wpsc-create.inc.php:237 includes/wpsc-create.inc.php:361
+#: includes/wpsc-db-backup.inc.php:130
+msgid "Database size: "
+msgstr ""
+
+#: includes/wpsc-create.inc.php:266
+#, php-format
+msgid "Step %s: creating database file."
+msgstr ""
+
+#: includes/wpsc-create.inc.php:290 includes/wpsc-db-backup.inc.php:47
+msgid ""
+"Your Database Character Set (DB_CHARSET) is not defined in your <b>wp-config."
+"php</b> file as is the standard for WordPress."
+msgstr ""
+
+#: includes/wpsc-create.inc.php:291 includes/wpsc-db-backup.inc.php:48
+msgid ""
+"Unfortunately, WP Stagecoach was not able to determine the character set "
+"used in your database.  We found conflicting results between tables."
+msgstr ""
+
+#: includes/wpsc-create.inc.php:292 includes/wpsc-db-backup.inc.php:49
+msgid ""
+"You will need to find what character set your database uses and set it in "
+"your wp-config.php file. See the <a href=\"http://codex.wordpress.org/"
+"Editing_wp-config.php#Database_character_set\">WordPress Codex</a> for more "
+"information."
+msgstr ""
+
+#: includes/wpsc-create.inc.php:293 includes/wpsc-db-backup.inc.php:50
+msgid "Here is a list of each table's character set:"
+msgstr ""
+
+#: includes/wpsc-create.inc.php:299 includes/wpsc-db-backup.inc.php:56
+msgid "Table: "
+msgstr ""
+
+#: includes/wpsc-create.inc.php:301 includes/wpsc-db-backup.inc.php:58
+msgid ""
+"If you can not determine what to do, you can contact <a href=\"https://"
+"wpstagecoach.com/support\">WP Stagecoach support</a>, and we may be able to "
+"help."
+msgstr ""
+
+#: includes/wpsc-create.inc.php:304 includes/wpsc-db-backup.inc.php:61
+msgid ""
+"Because WordPress has used the UTF-8 character set since version 2.2, you "
+"may wish to just create all tables on the staging site with the UTF-8 "
+"character set.  However, this might cause some character encoding problems "
+"if you import your database changes back from the staging site."
+msgstr ""
+
+#: includes/wpsc-create.inc.php:307
+msgid ""
+"Don't create a staging site right now; you can go investigate your database "
+"situation."
+msgstr ""
+
+#: includes/wpsc-create.inc.php:313 includes/wpsc-db-backup.inc.php:68
+msgid "Go ahead and create a staging with with UTF-8 encoding"
+msgstr ""
+
+#: includes/wpsc-create.inc.php:344
+msgid "Couldn't connect to database"
+msgstr ""
+
+#: includes/wpsc-create.inc.php:344
+msgid "on host"
+msgstr ""
+
+#: includes/wpsc-create.inc.php:344
+msgid ". This should never happen.  Error: "
+msgstr ""
+
+#: includes/wpsc-create.inc.php:350
+msgid "Error loading character set: "
+msgstr ""
+
+#: includes/wpsc-create.inc.php:351
+msgid ""
+"Please determine what character set your database uses and contact <a href="
+"\"https://wpstagecoach.com/support\" target=\"_blank\">WP Stagecoach "
+"support</a>"
+msgstr ""
+
+#: includes/wpsc-create.inc.php:393
+msgid "Error: I couldn't write to the file \""
+msgstr ""
+
+#: includes/wpsc-create.inc.php:393
+msgid "\" in the directory \""
+msgstr ""
+
+#: includes/wpsc-create.inc.php:394
+msgid ""
+"Please check your site's file and directory permissions for the above "
+"directory."
+msgstr ""
+
+#: includes/wpsc-create.inc.php:456
+msgid "Warning: could not count rows in \""
+msgstr ""
+
+#: includes/wpsc-create.inc.php:466
+msgid "dumping table "
+msgstr ""
+
+#: includes/wpsc-create.inc.php:527
+msgid "Error: "
+msgstr ""
+
+#: includes/wpsc-create.inc.php:589
+msgid "Finished creating compressed database file, it is "
+msgstr ""
+
+#: includes/wpsc-create.inc.php:613
+#, php-format
+msgid "Step %s: finding all files."
+msgstr ""
+
+#: includes/wpsc-create.inc.php:658
+msgid "Okay, we have the list of special needs directories."
+msgstr ""
+
+#: includes/wpsc-create.inc.php:671
+msgid ""
+"<b>Error</b>: We got a corrupted list of directories with special needs from "
+"the WP Stagecoach website."
+msgstr ""
+
+#: includes/wpsc-create.inc.php:672
+msgid ""
+"Please refresh this page (and confirm to resubmit form information) to try "
+"again."
+msgstr ""
+
+#: includes/wpsc-create.inc.php:673
+msgid ""
+"If this problem persists, please contact <a href=\"https://wpstagecoach.com/"
+"support\" target=\"_blank\">WP Stagecoach support</a>."
+msgstr ""
+
+#: includes/wpsc-create.inc.php:733
+msgid ""
+"These files are much larger than the files usually needed to create a "
+"staging site."
+msgstr ""
+
+#: includes/wpsc-create.inc.php:734
+msgid ""
+"If you think these files are necessary for your staging site, please "
+"<b>check each file</b> to add it to the staging site.  Otherwise, WP "
+"Stagecoach will ignore these files.</p>"
+msgstr ""
+
+#: includes/wpsc-create.inc.php:742
+msgid "Proceed"
+msgstr ""
+
+#: includes/wpsc-create.inc.php:751
+msgid ""
+"There is not enough free space on your web host to create the tar file we "
+"need to create your staging site."
+msgstr ""
+
+#: includes/wpsc-create.inc.php:752
+#, php-format
+msgid "Please free at least %s and try again.</p>"
+msgstr ""
+
+#: includes/wpsc-create.inc.php:757
+msgid ""
+"Okay, we've found all the files, next we'll make them into a single file."
+msgstr ""
+
+#: includes/wpsc-create.inc.php:768
+msgid ""
+"<p>We are including the \"wp-config.php\" file from the above directory.</p>"
+msgstr ""
+
+#: includes/wpsc-create.inc.php:778
+msgid ""
+"<b>Problem</b>: We could not find your config file <b>wp-config.php.</b>  "
+"How are you running WordPress without it?"
+msgstr ""
+
+#: includes/wpsc-create.inc.php:779
+msgid ""
+"This file is usually found in the root directory of your website, or the "
+"root's parent directory.  If it is somewhere else, you can move wp-config."
+"php to your site's root directory, and try again.  If you are having "
+"trouble, please contact <a href=\"https://wpstagecoach.com/support\" target="
+"\"_blank\">WP Stagecoach support</a> for help."
+msgstr ""
+
+#: includes/wpsc-create.inc.php:787
+#, php-format
+msgid "<b>Problem</b>: We could not write to the file <b> %s </b>."
+msgstr ""
+
+#: includes/wpsc-create.inc.php:788
+#, php-format
+msgid ""
+"Please check the permissions on the %s directory, or contact <a href="
+"\"https://wpstagecoach.com/support\" target=\"_blank\">WP Stagecoach "
+"Support</a>."
+msgstr ""
+
+#: includes/wpsc-create.inc.php:789
+msgid "Unfortunately, we cannot proceed further."
+msgstr ""
+
+#: includes/wpsc-create.inc.php:806 includes/wpsc-create.inc.php:869
+#, php-format
+msgid "Going to step %s next."
+msgstr ""
+
+#: includes/wpsc-create.inc.php:835
+#, php-format
+msgid "Step %s: adding large files to the list of files."
+msgstr ""
+
+#: includes/wpsc-create.inc.php:861
+msgid ""
+"There is not enough free space to create the tar file we need to create your "
+"staging site."
+msgstr ""
+
+#: includes/wpsc-create.inc.php:862
+#, php-format
+msgid "Please free at least %s and try again."
+msgstr ""
+
+#: includes/wpsc-create.inc.php:889
+#, php-format
+msgid "Step %s: creating tar file."
+msgstr ""
+
+#: includes/wpsc-create.inc.php:921
+msgid "We are going to try to create the tar file again."
+msgstr ""
+
+#: includes/wpsc-create.inc.php:924
+msgid "We could not copy the backup file to re-try creating the tar file.  "
+msgstr ""
+
+#: includes/wpsc-create.inc.php:925
+msgid "The file with the list of files"
+msgstr ""
+
+#: includes/wpsc-create.inc.php:927
+msgid "does exist, "
+msgstr ""
+
+#: includes/wpsc-create.inc.php:929
+msgid "but we cannot read it."
+msgstr ""
+
+#: includes/wpsc-create.inc.php:931
+msgid "and we can read it, but somehow we couldn't copy it."
+msgstr ""
+
+#: includes/wpsc-create.inc.php:934
+msgid "Can you please try to "
+msgstr ""
+
+#: includes/wpsc-create.inc.php:934
+msgid "create the staging site from the beginning again?"
+msgstr ""
+
+#: includes/wpsc-create.inc.php:943
+msgid ""
+"Sorry!  We were not able to create the tar file for your staging site.<br/>"
+msgstr ""
+
+#: includes/wpsc-create.inc.php:944
+msgid ""
+"Please give us as much information as you can in the feedback form below, "
+"and it will be sent to WP Stagecoach support for help!"
+msgstr ""
+
+#: includes/wpsc-create.inc.php:968
+msgid ""
+"We are charging ahead with the current tar file (even though it appears to "
+"be missing some files)!"
+msgstr ""
+
+#: includes/wpsc-create.inc.php:984
+msgid ""
+"We are using a small split size for the tar file to help make the tar file "
+"more reliably on slower servers."
+msgstr ""
+
+#: includes/wpsc-create.inc.php:1016 includes/wpsc-create.inc.php:1066
+#, php-format
+msgid "We are %d%% done building the initial tar file."
+msgstr ""
+
+#: includes/wpsc-create.inc.php:1019 includes/wpsc-create.inc.php:1069
+msgid "Show files being worked on"
+msgstr ""
+
+#: includes/wpsc-create.inc.php:1030
+msgid ""
+"Error: we couldn't create the initial file we need to make your staging site."
+msgstr ""
+
+#: includes/wpsc-create.inc.php:1084
+msgid ""
+"Error: we couldn't append to the initial file we need to make your staging "
+"site."
+msgstr ""
+
+#: includes/wpsc-create.inc.php:1154
+msgid "Yes, retry"
+msgstr ""
+
+#: includes/wpsc-create.inc.php:1155
+msgid "No, don't create a staging site"
+msgstr ""
+
+#: includes/wpsc-create.inc.php:1156
+msgid "Charge Boldly Ahead: create staging site without the missing files!"
+msgstr ""
+
+#: includes/wpsc-create.inc.php:1204
+msgid "back"
+msgstr ""
+
+#: includes/wpsc-create.inc.php:1206
+#, php-format
+msgid "Going %s to step %s next"
+msgstr ""
+
+#: includes/wpsc-create.inc.php:1237
+msgid "Sorry you were unable to create a staging site! :-("
+msgstr ""
+
+#: includes/wpsc-create.inc.php:1238
+msgid ""
+"Please provide feedback below with any error messages or additional "
+"information that might help diagnose the problem."
+msgstr ""
+
+#: includes/wpsc-create.inc.php:1251
+#, php-format
+msgid "Step %s: uploading your "
+msgstr ""
+
+#: includes/wpsc-create.inc.php:1260
+msgid "tar file"
+msgstr ""
+
+#: includes/wpsc-create.inc.php:1265
+msgid "files"
+msgstr ""
+
+#: includes/wpsc-create.inc.php:1269
+msgid "sql file"
+msgstr ""
+
+#: includes/wpsc-create.inc.php:1274
+msgid " to the WP Stagecoach server.</p>"
+msgstr ""
+
+#: includes/wpsc-create.inc.php:1283
+msgid ""
+"Uh oh.  We have run into a problem: we were not able to build the necessary "
+"files to create your staging site."
+msgstr ""
+
+#: includes/wpsc-create.inc.php:1284
+msgid "Please submit the feedback form below get help from WP Stagecoach"
+msgstr ""
+
+#: includes/wpsc-create.inc.php:1333
+#, php-format
+msgid "Uploading your %s file (size: %s ) to the staging server now..."
+msgstr ""
+
+#: includes/wpsc-create.inc.php:1393
+msgid ""
+"We could not determine what method SSL transport methods your website server "
+"supports."
+msgstr ""
+
+#: includes/wpsc-create.inc.php:1394
+msgid ""
+"Please contact <a href=\"https://wpstagecoach.com/support\" target=\"_blank"
+"\">WP Stagecoach support</a> with your hosting provider, and the following "
+"details:"
+msgstr ""
+
+#: includes/wpsc-create.inc.php:1413
+msgid ""
+"We encountered an error while uploading the file with Curl, we are going to "
+"try now with WordPress' remote post.<br/>"
+msgstr ""
+
+#: includes/wpsc-create.inc.php:1414
+msgid ""
+"However, due to how this function works, it may cause your site to run out "
+"of memory.  If so, please increase the WP memory limit and try again."
+msgstr ""
+
+#: includes/wpsc-create.inc.php:1432 includes/wpsc-import-check.inc.php:266
+msgid "Done!"
+msgstr ""
+
+#: includes/wpsc-create.inc.php:1452
+msgid "There was a problem communicating with the staging server."
+msgstr ""
+
+#: includes/wpsc-create.inc.php:1454
+msgid "We got this information from the server: "
+msgstr ""
+
+#: includes/wpsc-create.inc.php:1462
+msgid "<p><b>The size of the "
+msgstr ""
+
+#: includes/wpsc-create.inc.php:1464
+msgid "<p>Would you like to try again?</p>"
+msgstr ""
+
+#: includes/wpsc-create.inc.php:1481 includes/wpsc-create.inc.php:1760
+#: includes/wpsc-import-check.inc.php:142
+#: includes/wpsc-import-check.inc.php:289 includes/wpsc-import.inc.php:637
+msgid "Yes"
+msgstr ""
+
+#: includes/wpsc-create.inc.php:1482 includes/wpsc-create.inc.php:1761
+#: includes/wpsc-import-check.inc.php:143
+#: includes/wpsc-import-check.inc.php:290 includes/wpsc-import.inc.php:638
+msgid "No"
+msgstr ""
+
+#: includes/wpsc-create.inc.php:1486
+#, php-format
+msgid ""
+"Please note, the SQL file is %s in size, and the tar file is %s in size."
+msgstr ""
+
+#: includes/wpsc-create.inc.php:1488
+msgid "The SQL file is abnormally large. This may be the cause of the failure."
+msgstr ""
+
+#: includes/wpsc-create.inc.php:1490
+msgid "The tar file is abnormally large. This may be the cause of the failure."
+msgstr ""
+
+#: includes/wpsc-create.inc.php:1494
+msgid ""
+"If you don't want to try again, you can submit feedback to WP Stagecoach "
+"support and we will try to help."
+msgstr ""
+
+#: includes/wpsc-create.inc.php:1540
+#, php-format
+msgid "Step %s: creating your staging site!"
+msgstr ""
+
+#: includes/wpsc-create.inc.php:1647
+msgid "Here is your new staging site: "
+msgstr ""
+
+#: includes/wpsc-create.inc.php:1667 includes/wpsc-create.inc.php:1711
+msgid ""
+"Could not update the WordPress option for wpstagecoach.  This shouldn't "
+"happen."
+msgstr ""
+
+#: includes/wpsc-create.inc.php:1668 includes/wpsc-create.inc.php:1712
+#: includes/wpsc-delete.inc.php:111
+msgid "You might consider checking your database's consistency."
+msgstr ""
+
+#: includes/wpsc-create.inc.php:1669 includes/wpsc-delete.inc.php:112
+msgid ""
+"Please contact <a href=\"https://wpstagecoach.com/support\" target=\"_blank"
+"\">WP Stagecoach support</a> for help.</p>"
+msgstr ""
+
+#: includes/wpsc-create.inc.php:1679
+msgid "Oh no!  We couldn't finish creating your staging site. :-("
+msgstr ""
+
+#: includes/wpsc-create.inc.php:1680
+msgid ""
+"Please give us as much information as you can in the feedback form below, "
+"and WP Stagecoach support will investigate."
+msgstr ""
+
+#: includes/wpsc-create.inc.php:1713
+msgid ""
+"Please contact <a href=\"https://wpstagecoach.com/support\" target=\"_blank"
+"\">WP Stagecoach support</a> for help."
+msgstr ""
+
+#: includes/wpsc-create.inc.php:1729
+msgid ""
+"The \"$_POST['wpsc-cleanup']\" variable is set and contains a value that "
+"wasn't recognized.</p>"
+msgstr ""
+
+#: includes/wpsc-create.inc.php:1730
+msgid ""
+"Please report this problem to <a href=\"https://wpstagecoach.com/support\" "
+"target=\"_blank\">WP Stagecoach support</a> and include the following "
+"information:<br/>"
+msgstr ""
+
+#: includes/wpsc-create.inc.php:1748
+msgid "Problem communicating with the staging server."
+msgstr ""
+
+#: includes/wpsc-create.inc.php:1750
+msgid "We got the following information back from the server: "
+msgstr ""
+
+#: includes/wpsc-create.inc.php:1756
+msgid "Would you like to try again?"
+msgstr ""
+
+#: includes/wpsc-create.inc.php:1765
+msgid ""
+"Please note, the SQL file is %i mb in size, and the tar file is %i mb in "
+"size."
+msgstr ""
+
+#: includes/wpsc-create.inc.php:1767
+msgid ""
+"<p>The SQL file is abnormally large. This may be the cause of the failure.</"
+"p>"
+msgstr ""
+
+#: includes/wpsc-create.inc.php:1769
+msgid ""
+"<p>The tar file is abnormally large. This may be the cause of the failure.</"
+"p>"
+msgstr ""
+
+#: includes/wpsc-create.inc.php:1845
+msgid "It looks like you ran into problems creating your staging site."
+msgstr ""
+
+#: includes/wpsc-create.inc.php:1846
+msgid ""
+"Sorry to hear that!  Please provide feedback with any error messages below."
+msgstr ""
+
+#: includes/wpsc-db-backup.inc.php:22
+msgid "<p>Creating database backup.</p>"
+msgstr ""
+
+#: includes/wpsc-db-backup.inc.php:64
+msgid "Stop importing so you can go investigate your database situation."
+msgstr ""
+
+#: includes/wpsc-db-backup.inc.php:114
+msgid "Couldn't connect to database \""
+msgstr ""
+
+#: includes/wpsc-db-backup.inc.php:119
+msgid "Error loading character set \""
+msgstr ""
+
+#: includes/wpsc-db-backup.inc.php:120
+msgid ""
+"Please find out what character set your database is using and then contact "
+"<a href=\"https://wpstagecoach.com/support\" target=\"_blank\">WP Stagecoach "
+"support</a>."
+msgstr ""
+
+#: includes/wpsc-db-backup.inc.php:159
+msgid "Error: Couldn't write to the file"
+msgstr ""
+
+#: includes/wpsc-db-backup.inc.php:159
+msgid "in the directory"
+msgstr ""
+
+#: includes/wpsc-db-backup.inc.php:160
+msgid "Check your site's permissions."
+msgstr ""
+
+#: includes/wpsc-db-backup.inc.php:221 includes/wpsc-db-backup.inc.php:235
+msgid "<p>Error: $result is not an array!</p>"
+msgstr ""
+
+#: includes/wpsc-db-backup.inc.php:270
+msgid "<p>Error: $row is not an array!</p>"
+msgstr ""
+
+#: includes/wpsc-db-backup.inc.php:343
+msgid "Finished creating compressed database backup. Size: "
+msgstr ""
+
+#: includes/wpsc-delete.inc.php:21
+msgid ""
+"You tried to delete a staging site, but this site doesn't have a staging "
+"site. You shouldn't be able to access this page.  Please contact <a href="
+"\"https://wpstagecoach.com/support\" target=\"_blank\">WP Stagecoach "
+"support</a> with details of how you got to this page."
+msgstr ""
+
+#: includes/wpsc-delete.inc.php:23
+msgid "Would you like to create a new staging site?"
+msgstr ""
+
+#: includes/wpsc-delete.inc.php:77
+msgid "You have a database dump file in "
+msgstr ""
+
+#: includes/wpsc-delete.inc.php:78
+msgid "You may wish to delete it."
+msgstr ""
+
+#: includes/wpsc-delete.inc.php:110
+msgid ""
+"<p>Could not update the WordPress option for wpstagecoach.  This shouldn't "
+"happen."
+msgstr ""
+
+#: includes/wpsc-delete.inc.php:125
+msgid "<p>Your staging site "
+msgstr ""
+
+#: includes/wpsc-delete.inc.php:127
+msgid "Create a new staging site"
+msgstr ""
+
+#: includes/wpsc-delete.inc.php:130
+msgid "<p>There was a problem deleting your staging site: </p>"
+msgstr ""
+
+#: includes/wpsc-delete.inc.php:132
+msgid ""
+"<p>Please contact <a href=\"https://wpstagecoach.com/support\" target="
+"\"_blank\">WP Stagecoach support</a> with the above error information.</p>"
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:50
+msgid "You must provide a username and an API key."
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:97
+msgid ""
+"<p>The user name and password did not match.  We received the following "
+"error: "
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:127
+msgid "Welcome, "
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:145
+msgid "This site does not have a staging site."
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:152
+msgid ""
+"This is your <b>live</b> site, which has the corresponding staging site: "
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:154
+msgid "Delete this staging site: "
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:156
+msgid "Delete"
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:156
+msgid "Whoa there! Are you sure you want to delete this staging site?"
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:162
+msgid ""
+"This is your <b>staging</b> site, which has the corresponding live site: "
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:168
+msgid "Unrecognized response from the server about the status of this site."
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:169
+msgid "We received the following response:"
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:171
+msgid "type: "
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:209
+msgid ""
+"Your site is encrypted (https). Some encrypted staging sites may have "
+"problems with links or with logging in.  Please contact <a href=\"https://"
+"wpstagecoach.com/support\" target=\"_blank\">WP Stagecoach support</a> if "
+"you run into problems!"
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:215
+msgid "<h3>Create a staging site: </h3>"
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:217
+msgid "Staging site url: "
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:233
+msgid "WP Stagecoach isn't certain what the URL of your site is."
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:234
+msgid ""
+"On WordPress's General Settings page, the Site Address (URL) is set to: "
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:235
+msgid "but the actual URL of your site (in the title bar) is: "
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:236
+msgid "This can cause problems for WP Stagecoach."
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:238
+msgid "Select which URL you would like to use, and create a staging site."
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:240
+msgid "Stored URL (in the database): "
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:242
+msgid "Actual URL (in the titlebar): "
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:243
+msgid ""
+"If the staging site doesn't work, delete it and try again with the other URL"
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:250
+msgid "Disable caching plugins on staging site"
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:252
+msgid ""
+"Note: If you activate or deactivate any plugins on your staging site, you "
+"will need to reactivate the caching plugin after you import changes."
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:258
+msgid "Password protect the staging site"
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:262
+msgid "Select the username and password"
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:263 includes/wpsc-functions.inc.php:405
+msgid "Username: "
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:264
+msgid "Password: "
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:269
+msgid ""
+"<p>It looks like your live site is running on your local machine. To make "
+"your images visible to the internet, you must select the checkbox below.</p>"
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:274
+msgid ""
+"Don't <a href=\"https://wpstagecoach.com/question/wp-stagecoach-use-"
+"hotlinking/\" target=\"_blank\">hotlink images</a> on the staging site. "
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:276
+msgid "This may make the staging site creation take a very long time."
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:281
+msgid "Ride the Stagecoach"
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:293
+msgid "WP Stagecoach"
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:310
+msgid "Howdy, WP Stagecoach Passenger!"
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:311
+msgid "Need help?"
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:313
+msgid "Instructions"
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:314
+msgid "FAQ"
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:315
+msgid "Troubleshooting"
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:316
+msgid "Open a support ticket"
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:318
+msgid "Your Account:"
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:318
+msgid " get your API key, manage all of your staging sites"
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:346
+msgid "Website connection error with url: "
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:360
+msgid "We got a bad HTTP response from the server url: "
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:362
+msgid "Error code: "
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:365
+msgid ""
+"Somehow the plugin didn't supply enough information to WP Stagecoach to "
+"complete the following: "
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:366
+msgid "Please contact WP Stagecoach Support with the following information: "
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:369
+msgid "Error!  $post_result did not decode!"
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:370
+msgid ""
+"Please contact <a href=\"https://wpstagecoach.com/support\">WP Stagecoach "
+"support</a> with the following information:"
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:371
+msgid "The Full $post_result['body'] is as follows: "
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:376
+msgid "is empty!"
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:387
+msgid "It looks like your license has expired."
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:388
+msgid ""
+"Please check your <a href=\"https://wpstagecoach.com/your-account\" target="
+"\"_blank\">your account page on wpstagecoach.com</a> for more information."
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:392
+msgid "Invalid username.  You entered: \""
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:394
+msgid "\".  Please be sure this is correct!"
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:395 includes/wpsc-functions.inc.php:407
+#: includes/wpsc-functions.inc.php:565
+msgid ""
+"Your authentication information may be found on <a href=\"https://"
+"wpstagecoach.com/your-account\" target=\"_blank\">your account page on "
+"wpstagecoach.com</a>."
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:404
+msgid ""
+"Invalid username/API key combination.  Please confirm what you entered is "
+"correct:"
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:406
+msgid "API Key: "
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:414
+msgid ""
+"<b>Error:</b> A staging site with this name already exists. Please choose a "
+"different staging site name and start the staging site creation process "
+"again."
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:418
+msgid "We received a negative response from the WP Stagecoach server at: "
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:420 includes/wpsc-functions.inc.php:422
+msgid "Details: "
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:428
+msgid "We got a corrupted response from the url: "
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:460
+msgid ""
+"Please contact <a href=\"https://wpstagecoach.com/support\" target=\"_blank"
+"\">WP Stagecoach Support</a> with the following information:"
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:462
+msgid "General Information below:"
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:512
+msgid "Sorry, WP Stagecoach does not currently work on WordPress MultiSite."
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:522 includes/wpsc-functions.inc.php:528
+msgid ""
+"WP Stagecoach could not create the required \"/temp\" directory. Please "
+"check the permissions of the plugin directory: "
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:564
+msgid "Invalid username/API key combination.  Please try again"
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:590 wpstagecoach.php:788
+msgid "Your current Site URL is different from what is stored in the database."
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:591
+msgid ""
+"This makes it very difficult for WP Stagecoach to reliably change the URL in "
+"your database to set up your staging site.  One common cause of this is that "
+"the"
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:593
+msgid "and the "
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:595
+msgid ""
+"are hard-coded into the wp-config.php file.  For example, you may see this "
+"in your wp-config.php file: </p>"
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:600
+msgid ""
+"If you do see this, you might consider using a search and replace tool to "
+"change the Site URL in your database.  We recommend <a href=\"https://github."
+"com/interconnectit/Search-Replace-DB\" rel=\"nofollow\">Search and Replace "
+"DB by interconnect/it</a>."
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:601
+msgid ""
+"Alternatively, you can contact <a href=\"https://wpstagecoach.com/support"
+"\">WP Stagecoach support</a> with the following information to identify and "
+"resolve this issue."
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:602
+msgid "WordPress get_option()"
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:603
+msgid "Querying the database"
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:604
+msgid ""
+"Unfortunately, WP Stagecoach cannot create your staging site until this is "
+"resolved."
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:684
+msgid ""
+"You have specified a non-default upload path that is outside your live "
+"site's path.  WP Stagecoach cannot create your staging site.  Here are the "
+"values that we found:"
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:728
+msgid ""
+"It looks like the WP Stagecoach servers might be having a problem.  Result: "
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:730
+msgid ""
+"We have been notified, and are probably already working to fix this! You can "
+"visit <a href=\"https://status.wpstagecoach.com/\" target=\"_blank\">https://"
+"status.wpstagecoach.com/</a> to see the status of the WP Stagecoach servers."
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:734
+msgid ""
+"We received an error while checking the status of the WP Stagecoach API "
+"server.  Error:"
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:736 includes/wpsc-functions.inc.php:741
+msgid "This will likely cause WP Stagecoach to fail."
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:739
+msgid ""
+"We received a non-standard result while getting the status of the WP "
+"Stagecoach API server:"
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:774
+msgid ""
+"We were unable connect to the WP Stagecoach conductor server with https."
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:780 includes/wpsc-functions.inc.php:786
+msgid ""
+"We received a bad result while trying to connect to the WP Stagecoach server "
+"via https. Result: "
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:828
+msgid ""
+"Your server did not recognize the WP Stagecoach SSL certificate, but we were "
+"still able to make a https connnection to the WP Stagecoach server via "
+"https. Things should run smoothly, but if you do run into problems you may "
+"wish to contact your webhost's support to see if there is a problem on their "
+"end before contacting WP Stagecoach support."
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:831
+msgid ""
+"You may contact WP Stagecoach support, but know we may not be able to solve "
+"it if it is a problem with your web host's communication with our servers, "
+"and not actually our servers."
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:838
+msgid ""
+"Your server could not connect to the WP Stagecoach servers via the normal "
+"method, but we managed to make a https connnection with an alternative "
+"method (fopen instead of curl). This sub-optimal method may cause problems "
+"(running out of memory) while uploading files to create your staging site. "
+"If you run into problems you may wish to contact your webhost's support to "
+"see if there is a problem on their end before contacting <a href=\"https://"
+"wpstagecoach.com/support\" target=\"_blank\">WP Stagecoach support</a>."
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:842
+msgid ""
+"You may contact <a href=\"https://wpstagecoach.com/support\" target=\"_blank"
+"\">WP Stagecoach support</a>, but know we may not be able to solve it if it "
+"is a problem with your web host's communication with our servers, and not "
+"actually our servers."
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:930
+msgid "WARNING: "
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:932
+msgid "Don't panic just yet, but  "
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:934
+msgid ""
+"the file permissions for your Wordpress install do not appear to be fully "
+"writeable by the web server."
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:936
+msgid "Show/Hide"
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:939
+msgid "WP Stagecoach requires full write access to update your live site."
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:941
+msgid "You may not be able to import file changes to your live site!"
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:943
+msgid ""
+"We will create your staging site, but <b>you may not be able to import file "
+"changes to your live site!"
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:945
+msgid ""
+"Please contact your web host for help giving the web-server write access to "
+"your WordPress installation. More information:"
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:946
+#, php-format
+msgid ""
+"The directory <b>%s</b> is not writable by this script (which is running as "
+"UID %s."
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:947
+msgid ""
+"The directory has the following permissions (potential problems are in bold):"
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:948
+msgid "Owner UID: "
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:948 includes/wpsc-functions.inc.php:949
+msgid " permissions: "
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:949
+msgid "Group GID: "
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:950
+msgid "\"World\" permissions: "
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:954
+#, php-format
+msgid ""
+"Typically, the UID the PHP is running as (%s) should be the same as the "
+"directory UID (%s)."
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:955
+msgid ""
+"Because this PHP script is running as a different user than the owner of the "
+"directory, it probably does not have permission to write to the directory.  "
+"You will need to ask your hosting provider what you can do to remedy this "
+"situation."
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:958
+msgid ""
+"Typically the Owner should have permissions of \"Read, Write, Execute\", "
+"yours is "
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:959
+msgid ""
+"You will need to add owner write permissions for this directory. Please "
+"contact your hosting provider for help if you need help."
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:986 includes/wpsc-functions.inc.php:995
+#: includes/wpsc-functions.inc.php:1004
+msgid "Read"
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:986 includes/wpsc-functions.inc.php:995
+#: includes/wpsc-functions.inc.php:1004
+msgid "NO read"
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:988 includes/wpsc-functions.inc.php:997
+#: includes/wpsc-functions.inc.php:1006
+msgid "Write"
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:988 includes/wpsc-functions.inc.php:997
+#: includes/wpsc-functions.inc.php:1006
+msgid "NO write"
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:991
+msgid "Setuid"
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:991 includes/wpsc-functions.inc.php:1000
+#: includes/wpsc-functions.inc.php:1009
+msgid "Execute|"
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:992
+msgid "Setuid (without execute)"
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:992 includes/wpsc-functions.inc.php:1010
+msgid "NO execute"
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:1000
+msgid "Setgid"
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:1009
+msgid "Sticky"
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:1010
+msgid "Sticky (without execute)"
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:1024
+#, php-format
+msgid "Warning: You only have %s of free disk space."
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:1025
+msgid ""
+"This may not be enough space to create a staging site.  Please free some "
+"space before you try to run WP Stagecoach or you may run into problems."
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:1151 includes/wpsc-functions.inc.php:1188
+msgid "I am not backing up the WordPress install in: "
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:1155 includes/wpsc-functions.inc.php:1192
+msgid "I am not backing up this symlink to a dir: "
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:1157 includes/wpsc-functions.inc.php:1194
+#: includes/wpsc-functions.inc.php:1261
+msgid "I have no clue what this is: "
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:1186
+msgid "I am not backing up: "
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:1286
+msgid "WP Stagecoach User Feedback"
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:1290
+msgid "Did the staging site creation work?"
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:1294
+msgid "Did the import work?"
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:1303
+msgid "Please describe the problem you encountered."
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:1305
+msgid "Yes, it was a smooth ride!"
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:1306
+msgid "No, I ran into problems."
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:1307
+msgid "Comments:"
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:1336
+msgid "Submit feedback"
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:1361
+msgid "<b>SFTP/FTP</b> login credentials for the staging site:"
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:1363
+msgid ""
+"Please log into your <a href=\"https://wpstagecoach.com/your-account\" "
+"target=\"_blank\">WPStagecoach.com account</a> for your login details."
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:1365
+msgid "Your WordPress login credentials are the same as on your live site."
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:1423
+#, php-format
+msgid ""
+"Users of your theme, %s, have reported issues using this theme with WP "
+"Stagecoach."
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:1424 includes/wpsc-functions.inc.php:1531
+#: includes/wpsc-functions.inc.php:1560
+msgid ""
+"You may run into problems importing your database changes.  We recommend you "
+"do a manual import instead of an automatic import.  "
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:1425 includes/wpsc-functions.inc.php:1532
+#: includes/wpsc-functions.inc.php:1561
+msgid "More information about incompatible themes"
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:1530 includes/wpsc-functions.inc.php:1559
+#, php-format
+msgid ""
+"Users of your theme, %s, have reported issues using this theme with WP "
+"Stagecoach.  "
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:1535 includes/wpsc-functions.inc.php:1564
+#, php-format
+msgid "<a href=\"%1$s\">Hide this message</a>"
+msgstr ""
+
+#: includes/wpsc-functions.inc.php:1591
+msgid "Yikes, we couldn't automatically redirect, so we'll try it manually..."
+msgstr ""
+
+#: includes/wpsc-import-check.inc.php:52
+msgid ""
+"Step 1: talking to the conductor and storing the file containing all changes."
+msgstr ""
+
+#: includes/wpsc-import-check.inc.php:101
+msgid "There are no new changes on your staging site."
+msgstr ""
+
+#: includes/wpsc-import-check.inc.php:105
+msgid "Okay"
+msgstr ""
+
+#: includes/wpsc-import-check.inc.php:111
+msgid "We found changes on your staging site."
+msgstr ""
+
+#: includes/wpsc-import-check.inc.php:112
+msgid "We will download them in the next step, hang on!"
+msgstr ""
+
+#: includes/wpsc-import-check.inc.php:118
+msgid "There was a complication checking for changes on your staging site "
+msgstr ""
+
+#: includes/wpsc-import-check.inc.php:123
+msgid "Use File"
+msgstr ""
+
+#: includes/wpsc-import-check.inc.php:124
+msgid "Check again"
+msgstr ""
+
+#: includes/wpsc-import-check.inc.php:129 wpstagecoach.php:1161
+msgid "There was a problem checking for changes on your staging site "
+msgstr ""
+
+#: includes/wpsc-import-check.inc.php:130 wpstagecoach.php:1162
+msgid "Please contact WP Stagecoach support with this error information:"
+msgstr ""
+
+#: includes/wpsc-import-check.inc.php:163
+#, php-format
+msgid "Step %s: Downloading changes file."
+msgstr ""
+
+#: includes/wpsc-import-check.inc.php:192
+#, php-format
+msgid "Error: We were not able to open the %s file %s for writing!"
+msgstr ""
+
+#: includes/wpsc-import-check.inc.php:213
+#, php-format
+msgid ""
+"Error: We received an error from curl while downloading the %s file. "
+"Details: %s"
+msgstr ""
+
+#: includes/wpsc-import-check.inc.php:221
+#, php-format
+msgid "Error: We were not able to download the %s file with curl."
+msgstr ""
+
+#: includes/wpsc-import-check.inc.php:236
+#, php-format
+msgid ""
+"Error: We received an error from wp_remote_post while downloading the %s "
+"file. Details: %s"
+msgstr ""
+
+#: includes/wpsc-import-check.inc.php:241
+#, php-format
+msgid "Error: We were not able to write to the %s file with wp_remote_post."
+msgstr ""
+
+#: includes/wpsc-import-check.inc.php:248
+msgid ""
+"We could not determine what method SSL transport methods your live site "
+"supports."
+msgstr ""
+
+#: includes/wpsc-import-check.inc.php:249
+msgid ""
+"Please contact WP Stagecoach support with your hosting provider, and the "
+"following details: "
+msgstr ""
+
+#: includes/wpsc-import-check.inc.php:257
+#, php-format
+msgid ""
+"Error: We could not find the %s file %s that we just created!  Might "
+"something be wrong with your web host?"
+msgstr ""
+
+#: includes/wpsc-import-check.inc.php:280
+msgid ""
+"Error: the changes file appears to be corrupt! Would you like to try to "
+"download it again?"
+msgstr ""
+
+#: includes/wpsc-import-check.inc.php:293
+msgid "The changes file downloaded without a problem!"
+msgstr ""
+
+#: includes/wpsc-import-check.inc.php:312
+#, php-format
+msgid "Step %s: opening file and recording the changes."
+msgstr ""
+
+#: includes/wpsc-import-check.inc.php:327
+msgid "The changes file looks okay!"
+msgstr ""
+
+#: includes/wpsc-import-check.inc.php:328
+msgid "Summary of changes:"
+msgstr ""
+
+#: includes/wpsc-import-check.inc.php:331
+msgid "database tables"
+msgstr ""
+
+#: includes/wpsc-import-check.inc.php:335
+msgid "database"
+msgstr ""
+
+#: includes/wpsc-import-check.inc.php:340
+msgid "new files"
+msgstr ""
+
+#: includes/wpsc-import-check.inc.php:342
+msgid "modified files"
+msgstr ""
+
+#: includes/wpsc-import-check.inc.php:344
+msgid "deleted files"
+msgstr ""
+
+#: includes/wpsc-import-check.inc.php:349
+msgid "Show raw list of changes"
+msgstr ""
+
+#: includes/wpsc-import-check.inc.php:357
+msgid ""
+"It looks like the changes file invalid. Please contact <a href=\"https://"
+"wpstagecoach.com/support\" target=\"_blank\">WP Stagecoach support</a> with "
+"the following information:"
+msgstr ""
+
+#: includes/wpsc-import-check.inc.php:371
+msgid "There are already stored changes in your database -- adding to them"
+msgstr ""
+
+#: includes/wpsc-import-check.inc.php:391
+msgid "The stored changes were succesfully merged with the new changes"
+msgstr ""
+
+#: includes/wpsc-import-check.inc.php:396
+msgid "We were't able to merge the new changes with the stored changes"
+msgstr ""
+
+#: includes/wpsc-import-check.inc.php:404
+msgid "Breaking up import into a managable packet size!"
+msgstr ""
+
+#: includes/wpsc-import-check.inc.php:413
+#: includes/wpsc-import-check.inc.php:424
+msgid "changes varable size:"
+msgstr ""
+
+#: includes/wpsc-import-check.inc.php:444
+msgid "Attempting to store new changes to the database"
+msgstr ""
+
+#: includes/wpsc-import-check.inc.php:452
+msgid "The stored changes were succesfully merged with the new changes."
+msgstr ""
+
+#: includes/wpsc-import-check.inc.php:457
+msgid "We were't able to merge the new changes with the stored changes."
+msgstr ""
+
+#: includes/wpsc-import-check.inc.php:497
+msgid ""
+"Unfortunately, we unable to store your changes in the database. Please "
+"contact <a href=\"https://wpstagecoach.com/support\" target=\"_blank\">WP "
+"Stagecoach support</a> with the following information:"
+msgstr ""
+
+#: includes/wpsc-import-check.inc.php:499
+msgid "The result from our attempt to store the changes: "
+msgstr ""
+
+#: includes/wpsc-import-check.inc.php:502
+msgid "previously stored changes:"
+msgstr ""
+
+#: includes/wpsc-import-check.inc.php:504
+msgid "database: "
+msgstr ""
+
+#: includes/wpsc-import-check.inc.php:506
+msgid "files: "
+msgstr ""
+
+#: includes/wpsc-import-check.inc.php:512
+msgid "We stored you changes into the database!"
+msgstr ""
+
+#: includes/wpsc-import-check.inc.php:551
+msgid "We succesfully cleaned up your changes files from the server."
+msgstr ""
+
+#: includes/wpsc-import-check.inc.php:554
+msgid "There was a problem cleaning up the changes on your staging site "
+msgstr ""
+
+#: includes/wpsc-import-check.inc.php:555
+msgid ""
+"Please contact <a href=\"https://wpstagecoach.com/support\" target=\"_blank"
+"\">WP Stagecoach support</a> with this error information:"
+msgstr ""
+
+#: includes/wpsc-import-display.inc.php:32
+msgid "One-Click"
+msgstr ""
+
+#: includes/wpsc-import-display.inc.php:33
+msgid "Advanced"
+msgstr ""
+
+#: includes/wpsc-import-display.inc.php:34
+msgid "Manual"
+msgstr ""
+
+#: includes/wpsc-import-display.inc.php:38
+msgid "One-Click Import"
+msgstr ""
+
+#: includes/wpsc-import-display.inc.php:40
+#: includes/wpsc-import-display.inc.php:277
+msgid "Import all changes"
+msgstr ""
+
+#: includes/wpsc-import-display.inc.php:41
+msgid "Import only file changes"
+msgstr ""
+
+#: includes/wpsc-import-display.inc.php:42
+msgid "Import only database changes"
+msgstr ""
+
+#: includes/wpsc-import-display.inc.php:46
+msgid "What is the difference between file changes and database changes?"
+msgstr ""
+
+#: includes/wpsc-import-display.inc.php:64
+msgid "Advanced Import"
+msgstr ""
+
+#: includes/wpsc-import-display.inc.php:65
+msgid ""
+"Advanced import lets you select which changes you want to import from the "
+"staging site."
+msgstr ""
+
+#: includes/wpsc-import-display.inc.php:68
+msgid ""
+"You have a very large number of changes to import. This can cause problems "
+"with some web servers if too many changes are selected. Please only use this "
+"page if you really know what you are doing and what your server is capable "
+"of!"
+msgstr ""
+
+#: includes/wpsc-import-display.inc.php:72
+msgid ""
+"We were unable to retrieve the changes from the WordPress database. Please "
+"try again.  If you continue to have problems, contact <a href=\"https://"
+"wpstagecoach.com/support\" target=\"_blank\">WP Stagecoach support</a>."
+"wpstagecoach"
+msgstr ""
+
+#: includes/wpsc-import-display.inc.php:81
+msgid "Import all file changes"
+msgstr ""
+
+#: includes/wpsc-import-display.inc.php:82
+msgid "or select specific file changes to import"
+msgstr ""
+
+#: includes/wpsc-import-display.inc.php:111
+msgid "Import all database changes"
+msgstr ""
+
+#: includes/wpsc-import-display.inc.php:112
+msgid "or select specific database changes to import"
+msgstr ""
+
+#: includes/wpsc-import-display.inc.php:116
+msgid ""
+"WARNING! Selecting some database changes but not others can make a huge mess "
+"of your site.  Only do this if you know what you are doing!"
+msgstr ""
+
+#: includes/wpsc-import-display.inc.php:118
+msgid "The following tables have had changes made in them:"
+msgstr ""
+
+#: includes/wpsc-import-display.inc.php:121
+msgid "table:"
+msgstr ""
+
+#: includes/wpsc-import-display.inc.php:288
+msgid ""
+"Please back up your site before you import changes from your staging site!"
+msgstr ""
+
+#: includes/wpsc-import-display.inc.php:291
+msgid "Import Selected Changes"
+msgstr ""
+
+#: includes/wpsc-import-display.inc.php:299
+msgid ""
+"If automatic imports are not working, you might need to do a manual import. "
+"Use this page to generate the files you need for a manual import."
+msgstr ""
+
+#: includes/wpsc-import-display.inc.php:300
+msgid "Detailed instructions for manual import."
+msgstr ""
+
+#: includes/wpsc-import-display.inc.php:311
+msgid "Generate Manual Import Files"
+msgstr ""
+
+#: includes/wpsc-import.inc.php:29
+msgid "WP Stagecoach is importing your changes"
+msgstr ""
+
+#: includes/wpsc-import.inc.php:50
+msgid "The \"temp/\" directory in the WP Stagecoach plugin is not writable!"
+msgstr ""
+
+#: includes/wpsc-import.inc.php:51
+msgid "You need to fix this before we can continue. The full path is: "
+msgstr ""
+
+#: includes/wpsc-import.inc.php:138
+msgid ""
+"Step 1: loop through changes, store choices, and make sure everything is "
+"writable."
+msgstr ""
+
+#: includes/wpsc-import.inc.php:159
+msgid "Warning: this selected post array failed to decode: "
+msgstr ""
+
+#: includes/wpsc-import.inc.php:175
+msgid "Continuing the import.wpstagecoach"
+msgstr ""
+
+#: includes/wpsc-import.inc.php:210
+msgid "Importing ALL changes."
+msgstr ""
+
+#: includes/wpsc-import.inc.php:214
+msgid "Importing file changes only."
+msgstr ""
+
+#: includes/wpsc-import.inc.php:222
+msgid "Importing database changes only."
+msgstr ""
+
+#: includes/wpsc-import.inc.php:315
+msgid "You did not select any files or database changes to import!"
+msgstr ""
+
+#: includes/wpsc-import.inc.php:317
+msgid "Go back and select some file or database changes to import"
+msgstr ""
+
+#: includes/wpsc-import.inc.php:322
+msgid "No files selected, just database entries, moving on."
+msgstr ""
+
+#: includes/wpsc-import.inc.php:335
+#, php-format
+msgid "The file %s <b>should not<b> exist, but it does."
+msgstr ""
+
+#: includes/wpsc-import.inc.php:338
+#, php-format
+msgid "The file %s <b>should</b> exist, but it does not."
+msgstr ""
+
+#: includes/wpsc-import.inc.php:341
+#, php-format
+msgid ""
+"The file %s <b>should</b> exist, but it does not (it was going to be deleted "
+"anyway, but it is odd)."
+msgstr ""
+
+#: includes/wpsc-import.inc.php:364
+msgid "Some files or dirs are unwritable:"
+msgstr ""
+
+#: includes/wpsc-import.inc.php:365
+msgid ""
+"The following files or directories you are trying to import are not writable "
+"by your webserver:"
+msgstr ""
+
+#: includes/wpsc-import.inc.php:370
+msgid " (the root directory of your website)"
+msgstr ""
+
+#: includes/wpsc-import.inc.php:376
+msgid ""
+"WP Stagecoach cannot import changes to these files unless you make them "
+"writable by your web server."
+msgstr ""
+
+#: includes/wpsc-import.inc.php:377
+msgid "More information about file permissions."
+msgstr ""
+
+#: includes/wpsc-import.inc.php:378
+msgid ""
+"You may safely leave this page and come back when you are done and reload "
+"this page (you might have to press yes to resubmit the data)."
+msgstr ""
+
+#: includes/wpsc-import.inc.php:384
+msgid "Some files are missing or unexpectedly present:"
+msgstr ""
+
+#: includes/wpsc-import.inc.php:385
+msgid ""
+"The following files are in a state different from when the staging site was "
+"created:"
+msgstr ""
+
+#: includes/wpsc-import.inc.php:394
+msgid ""
+"Importing may yield unexpected results, and you may not be able to totally "
+"revert the import."
+msgstr ""
+
+#: includes/wpsc-import.inc.php:398
+msgid ""
+"Do you want to continue the import, knowing that it may not go correctly?"
+msgstr ""
+
+#: includes/wpsc-import.inc.php:399
+msgid "Make sure you have backed up your site first!"
+msgstr ""
+
+#: includes/wpsc-import.inc.php:412
+msgid "Yes, charge boldly ahead!"
+msgstr ""
+
+#: includes/wpsc-import.inc.php:416
+msgid "No, go back and choose different files."
+msgstr ""
+
+#: includes/wpsc-import.inc.php:439
+#, php-format
+msgid "Step %s: talking the conductor to have new tar file created."
+msgstr ""
+
+#: includes/wpsc-import.inc.php:448
+msgid ""
+"Uh oh! There was an error retrieving the selected file entries from the "
+"WordPress database. Please re-select which changes to import and try again."
+msgstr ""
+
+#: includes/wpsc-import.inc.php:460
+msgid "list of new/mod files we need to download: "
+msgstr ""
+
+#: includes/wpsc-import.inc.php:495
+msgid "Great, we were able to successfully make the tar file."
+msgstr ""
+
+#: includes/wpsc-import.inc.php:515
+#, php-format
+msgid "Step %s: download tar file from app.WPSC.com."
+msgstr ""
+
+#: includes/wpsc-import.inc.php:541
+#, php-format
+msgid "Error: we could not open the %s file %s for writing!"
+msgstr ""
+
+#: includes/wpsc-import.inc.php:563
+#, php-format
+msgid "Error: we received an error from curl while downloading the %s file: "
+msgstr ""
+
+#: includes/wpsc-import.inc.php:571
+#, php-format
+msgid "Error: we were not able to download the %s file!"
+msgstr ""
+
+#: includes/wpsc-import.inc.php:587
+#, php-format
+msgid ""
+" Error: we got a bad response from the staging server while downloading the "
+"%s file. Details: "
+msgstr ""
+
+#: includes/wpsc-import.inc.php:592
+#, php-format
+msgid "Error: we were not able to write to the %s file!"
+msgstr ""
+
+#: includes/wpsc-import.inc.php:599
+msgid ""
+"We could not determine what SSL transport methods your live site supports."
+msgstr ""
+
+#: includes/wpsc-import.inc.php:600
+msgid ""
+"Please contact <a href=\"https://wpstagecoach.com/support\" target=\"_blank"
+"\">WP Stagecoach support</a> to tell us your hosting provider and the "
+"following details:"
+msgstr ""
+
+#: includes/wpsc-import.inc.php:606
+#, php-format
+msgid ""
+"Error: we could not find the %s file %s we just wrote!  Might something be "
+"wrong with your web host?"
+msgstr ""
+
+#: includes/wpsc-import.inc.php:627
+msgid ""
+"Error: the changes file we just downloaded appears to be corrupted! Would "
+"you lie to try to download it again?"
+msgstr ""
+
+#: includes/wpsc-import.inc.php:641
+msgid "Successfully downloaded the changes file!"
+msgstr ""
+
+#: includes/wpsc-import.inc.php:659
+#, php-format
+msgid "Step %s: untar tar file into \"temp\" dir."
+msgstr ""
+
+#: includes/wpsc-import.inc.php:671
+msgid ""
+"Error: we didn't get a valid list of files from the tar file. Please check "
+"the file: "
+msgstr ""
+
+#: includes/wpsc-import.inc.php:676
+msgid "opened tar."
+msgstr ""
+
+#: includes/wpsc-import.inc.php:683
+msgid "Error: can't find the tar file $s. I swear it has here a second ago!"
+msgstr ""
+
+#: includes/wpsc-import.inc.php:691
+msgid ""
+"Uh oh! There was an error retrieving the selected file entries from the "
+"WordPress database. Please re-select your changes to import and try again."
+msgstr ""
+
+#: includes/wpsc-import.inc.php:709
+msgid ""
+"Error: the tar file does not have all the files we requested. Please try "
+"again, or contact <a href=\"https://wpstagecoach.com/support\" target="
+"\"_blank\">WP Stagecoach support</a> if it happens again."
+msgstr ""
+
+#: includes/wpsc-import.inc.php:714
+msgid "The tar file has all the files we asked for, yay!"
+msgstr ""
+
+#: includes/wpsc-import.inc.php:718
+msgid "Files were extracted successfully"
+msgstr ""
+
+#: includes/wpsc-import.inc.php:721
+#, php-format
+msgid ""
+"We ran into a problem extracting the files to %s/extract.  Please check the "
+"permissions on that directory"
+msgstr ""
+
+#: includes/wpsc-import.inc.php:732
+msgid "No database entries selected. Just doing file changes. Moving on."
+msgstr ""
+
+#: includes/wpsc-import.inc.php:736
+msgid ""
+"All the files have been extracted into the temp directory. Going to backup "
+"the database next."
+msgstr ""
+
+#: includes/wpsc-import.inc.php:752
+#, php-format
+msgid "Step %s: backup DB!"
+msgstr ""
+
+#: includes/wpsc-import.inc.php:760
+msgid ""
+"Error: we couldn't create the database backup file. Please try again. "
+"Contact <a href=\"https://wpstagecoach.com/support\" target=\"_blank\">WP "
+"Stagecoach support</a> if it happens again."
+msgstr ""
+
+#: includes/wpsc-import.inc.php:768
+msgid "We have backed up your database in its current state to the file:"
+msgstr ""
+
+#: includes/wpsc-import.inc.php:769
+msgid ""
+"Your backup file has been noted in the WP Stagecoach dashboard, in case you "
+"need it!"
+msgstr ""
+
+#: includes/wpsc-import.inc.php:805
+#, php-format
+msgid ""
+"Step %s: Loop through file lists, move old files away and move new files "
+"into place."
+msgstr ""
+
+#: includes/wpsc-import.inc.php:817
+msgid "No database entries selected, just doing file changes."
+msgstr ""
+
+#: includes/wpsc-import.inc.php:822
+msgid "Do DB changes."
+msgstr ""
+
+#: includes/wpsc-import.inc.php:826
+msgid "Error: the stored database changes entry is bad."
+msgstr ""
+
+#: includes/wpsc-import.inc.php:836
+msgid ""
+"Uh oh!  There was an error retrieving the selected file entries from the "
+"WordPress database. Please re-select which changes to import and try again."
+msgstr ""
+
+#: includes/wpsc-import.inc.php:861
+#, php-format
+msgid ""
+"Whoa! The file %s, which we just extracted, does not appear to be there."
+msgstr ""
+
+#: includes/wpsc-import.inc.php:862
+msgid ""
+"Something strange is happening in the filesystem! WP Stagecoach will not "
+"continue importing because it will lead to unexpected results."
+msgstr ""
+
+#: includes/wpsc-import.inc.php:863
+msgid ""
+"Please contact <a href=\"https://wpstagecoach.com/support\" target=\"_blank"
+"\">WP Stagecoach support</a> and tell us exactly what happened, and what you "
+"did before it happened."
+msgstr ""
+
+#: includes/wpsc-import.inc.php:873
+#, php-format
+msgid ""
+"Error: could not rename %s file %s to temp file name %s.wpsc_temp.  Please "
+"check permissions on this directory: %s"
+msgstr ""
+
+#: includes/wpsc-import.inc.php:882
+#, php-format
+msgid "The file %s does not appear to exist, but it should!"
+msgstr ""
+
+#: includes/wpsc-import.inc.php:884
+msgid ""
+"We are going to try to move the file from the staging site to here anyway."
+msgstr ""
+
+#: includes/wpsc-import.inc.php:887
+msgid ""
+"We were just going to delete it anyway, but it is odd that it disappeared."
+msgstr ""
+
+#: includes/wpsc-import.inc.php:915
+#, php-format
+msgid ""
+"Error: could not move the %s file from \"./wp-content/plugins/wpstagecoach/"
+"temp/extract/%s\" to \"./%s\".  Please check permissions on this directory: "
+"%s"
+msgstr ""
+
+#: includes/wpsc-import.inc.php:941
+msgid ""
+"Some files are not in the state WP Stagecoach expected. We have done our "
+"best to figure out what needed to happen, but just in case, here is what we "
+"found:"
+msgstr ""
+
+#: includes/wpsc-import.inc.php:958 wpstagecoach.php:341
+msgid "Continue"
+msgstr ""
+
+#: includes/wpsc-import.inc.php:995
+#, php-format
+msgid "Step %s: confirm and clean up!"
+msgstr ""
+
+#: includes/wpsc-import.inc.php:997
+msgid ""
+"Your changes have been imported! Please go check your site and make sure "
+"everything is as you expected."
+msgstr ""
+
+#: includes/wpsc-import.inc.php:998
+msgid "Check your site"
+msgstr ""
+
+#: includes/wpsc-import.inc.php:1000
+msgid ""
+"If everything looks right, press the \"Clean Up\" button below and WP "
+"Stagecoach will clean up after itself (we have left some temporary files "
+"ending with .wpsc_temp: Clean Up will remove all those)"
+msgstr ""
+
+#: includes/wpsc-import.inc.php:1016
+msgid "Clean Up and Delete staging site"
+msgstr ""
+
+#: includes/wpsc-import.inc.php:1017
+msgid "Clean Up"
+msgstr ""
+
+#: includes/wpsc-import.inc.php:1021
+msgid ""
+"If everything is not perfect, and you want to revert all your files back to "
+"the way they were before the import, click \"Revert Files.\""
+msgstr ""
+
+#: includes/wpsc-import.inc.php:1022
+msgid ""
+"If you need to revert your database, you can find a backup of your database "
+"here:"
+msgstr ""
+
+#: includes/wpsc-import.inc.php:1023
+msgid ""
+"To revert the database, follow the instructions for <a href=\"https://"
+"wpstagecoach.com/manual-import/#database\" target=\"_blank\">manually "
+"importing your database</a>."
+msgstr ""
+
+#: includes/wpsc-import.inc.php:1030
+msgid "Revert Files"
+msgstr ""
+
+#: includes/wpsc-import.inc.php:1048
+#, php-format
+msgid "Step %s: everything is good!"
+msgstr ""
+
+#: includes/wpsc-import.inc.php:1053
+msgid "We have cleaned up after ourselves! Bye!"
+msgstr ""
+
+#: includes/wpsc-import.inc.php:1128
+msgid "You have cleaned up after the import. Did everything work properly?"
+msgstr ""
+
+#: includes/wpsc-import.inc.php:1145
+#, php-format
+msgid "Step %s: we messed up, so we are reverting files"
+msgstr ""
+
+#: includes/wpsc-import.inc.php:1148
+msgid "Restoring the original files."
+msgstr ""
+
+#: includes/wpsc-import.inc.php:1151
+msgid "If you need, you may restore the database from the DB dump file: "
+msgstr ""
+
+#: includes/wpsc-import.inc.php:1152
+msgid ""
+" Follow the instructions for <a href=\"https://wpstagecoach.com/manual-"
+"import/#database\" target=\"_blank\">manually importing your database</a>"
+msgstr ""
+
+#: includes/wpsc-import.inc.php:1158
+msgid ""
+"Uh oh! There was an error retrieving the selected file entries from the "
+"WordPress database; please re-select which changes to import and try again."
+msgstr ""
+
+#: includes/wpsc-import.inc.php:1217
+msgid ""
+"Sorry to see you reverted back your file changes. Did the import work "
+"correctly?"
+msgstr ""
+
+#: wpstagecoach.php:244
+msgid "The database backup WP Stagecoach made before importing changes is:"
+msgstr ""
+
+#: wpstagecoach.php:312
+msgid "Please go to your live site, <a href=\"http://"
+msgstr ""
+
+#: wpstagecoach.php:336
+msgid ""
+"It looks like you have already started an import, and are currently on step "
+msgstr ""
+
+#: wpstagecoach.php:337
+msgid "Click \"Continue\" below if you want to resume from this step."
+msgstr ""
+
+#: wpstagecoach.php:344
+msgid ""
+"Alternatively, if you really know what you are doing, you can press \"Start "
+"import over\" to start the import process over."
+msgstr ""
+
+#: wpstagecoach.php:345
+msgid ""
+"WP Stagecoach cannot reset your live site to how it was before the first "
+"import attempt: proceed at your own risk!"
+msgstr ""
+
+#: wpstagecoach.php:346
+msgid ""
+"This may leave your site in an unknown state, and reimporting may cause "
+"major problems!"
+msgstr ""
+
+#: wpstagecoach.php:348
+msgid "Start import over"
+msgstr ""
+
+#: wpstagecoach.php:369
+msgid " changes from staging site: "
+msgstr ""
+
+#: wpstagecoach.php:406
+msgid "<p>Okay, we will stop the import process here.</p>"
+msgstr ""
+
+#: wpstagecoach.php:415
+msgid ""
+"<h3>The import step counter has been reset.<br/> WP Stagecoach cannot reset "
+"your live site to how it was before the first import attempt--proceed at "
+"your own risk.</h3>"
+msgstr ""
+
+#: wpstagecoach.php:422
+msgid "<p>Sorry, we can't figure out what you're trying to do.</p>"
+msgstr ""
+
+#: wpstagecoach.php:462
+msgid "The User name and API Key fields below are required."
+msgstr ""
+
+#: wpstagecoach.php:474
+msgid "updating..."
+msgstr ""
+
+#: wpstagecoach.php:518
+msgid ""
+"<p>You must enter your authentication information before you can use WP "
+"Stagecoach.</p>"
+msgstr ""
+
+#: wpstagecoach.php:519
+msgid ""
+"<p>Your authentication information may be found on your <a href=\"https://"
+"wpstagecoach.com/your-account\" target=\"_blank\">account page on "
+"wpstagecoach.com</a>.</p>"
+msgstr ""
+
+#: wpstagecoach.php:525 wpstagecoach.php:698
+msgid "Update"
+msgstr ""
+
+#: wpstagecoach.php:527 wpstagecoach.php:638
+msgid "Submit"
+msgstr ""
+
+#: wpstagecoach.php:548
+msgid "User name:"
+msgstr ""
+
+#: wpstagecoach.php:553
+msgid "API Key:"
+msgstr ""
+
+#: wpstagecoach.php:558
+msgid "Delete plugin settings when you disable the plugin?"
+msgstr ""
+
+#: wpstagecoach.php:563
+msgid "Enable Advanced Options?"
+msgstr ""
+
+#: wpstagecoach.php:569
+msgid "Enable Debug menu?"
+msgstr ""
+
+#: wpstagecoach.php:575
+msgid "Optimize WP Stagecoach for a slower server?"
+msgstr ""
+
+#: wpstagecoach.php:607
+msgid "<h3>Advanced Options</h3>"
+msgstr ""
+
+#: wpstagecoach.php:618
+msgid ""
+"<p>The list of changes retrieved from your staging site has been removed.</p>"
+msgstr ""
+
+#: wpstagecoach.php:623
+msgid "<p>The WP Stagecoach sanity transient has been removed.</p>"
+msgstr ""
+
+#: wpstagecoach.php:633
+msgid "Delete the list of staging site changes from local database"
+msgstr ""
+
+#: wpstagecoach.php:636
+msgid "Delete the WP Stagecoach sanity transient"
+msgstr ""
+
+#: wpstagecoach.php:670
+msgid "<h3>Debug information:</h3>"
+msgstr ""
+
+#: wpstagecoach.php:685
+msgid "<p>Debug messages option successfully updated!</p>"
+msgstr ""
+
+#: wpstagecoach.php:702
+msgid "Status:"
+msgstr ""
+
+#: wpstagecoach.php:707
+msgid "Great! We are able to connect to the WP Stagecoach server via https."
+msgstr ""
+
+#: wpstagecoach.php:712
+msgid ""
+"Great! Your theme doesn't have any known incompatibilities with WP "
+"Stagecoach."
+msgstr ""
+
+#: wpstagecoach.php:724
+msgid "Locally-stored changes:"
+msgstr ""
+
+#: wpstagecoach.php:725
+msgid "This is a summary of all the stored changes from your staging site:"
+msgstr ""
+
+#: wpstagecoach.php:728
+msgid "retrieved_changes["
+msgstr ""
+
+#: wpstagecoach.php:728
+msgid "] - size: "
+msgstr ""
+
+#: wpstagecoach.php:734
+msgid "size: "
+msgstr ""
+
+#: wpstagecoach.php:741
+msgid "Show absolutely all the retrieved changes"
+msgstr ""
+
+#: wpstagecoach.php:744 wpstagecoach.php:863
+msgid "No changes have been stored."
+msgstr ""
+
+#: wpstagecoach.php:750
+msgid "Site information:"
+msgstr ""
+
+#: wpstagecoach.php:753
+msgid "siteurl (from DB): "
+msgstr ""
+
+#: wpstagecoach.php:758
+msgid " \"option\" siteurl: "
+msgstr ""
+
+#: wpstagecoach.php:759
+msgid "   home (from DB): "
+msgstr ""
+
+#: wpstagecoach.php:764
+msgid "    \"option\" home: "
+msgstr ""
+
+#: wpstagecoach.php:770
+msgid "Your site's directory path: "
+msgstr ""
+
+#: wpstagecoach.php:789
+msgid ""
+"This makes it very difficult for WP Stagecoach to reliably automatically "
+"change your site URL in the database so the site will work on the staging "
+"server."
+msgstr ""
+
+#: wpstagecoach.php:790
+msgid ""
+"One common cause of this is that the <a href=\"http://codex.wordpress.org/"
+"Editing_wp-config.php#WordPress_address_.28URL.29\" rel=\"nofollow"
+"\">WP_SITEURL</a> \n"
+"\t\t\t\tand the <a href=\"http://codex.wordpress.org/Editing_wp-config."
+"php#Blog_address_.28URL.29\" rel=\"nofollow\">WP_HOME</a> are hard-coded "
+"into the\n"
+"\t\t\t\t<b>wp-config.php</b> file to change the URL of the site."
+msgstr ""
+
+#: wpstagecoach.php:793
+msgid "For example, you may see this in your wp-config.php file:"
+msgstr ""
+
+#: wpstagecoach.php:796
+msgid ""
+"If you do see this, you might consider running a serialized search and "
+"replace over your database to permanently change the Site URL.<br/>\n"
+"\t\t\t\t<a href=\"http://interconnectit.com/products/search-and-replace-for-"
+"wordpress-databases/\" rel=\"nofollow\">interconnect/it</a>\n"
+"\t\t\t\thas a wonderful product on github called <a href=\"https://github."
+"com/interconnectit/Search-Replace-DB\" rel=\"nofollow\">Search Replace DB</"
+"a>."
+msgstr ""
+
+#: wpstagecoach.php:799
+msgid "Unfortunately, WP Stagecoach cannot proceed further automatically. :-("
+msgstr ""
+
+#: wpstagecoach.php:804
+msgid "WordPress is installed in a different directory from your URL"
+msgstr ""
+
+#: wpstagecoach.php:805
+msgid "More information about this."
+msgstr ""
+
+#: wpstagecoach.php:806
+msgid ""
+"Unfortunately, WP Stagecoach does not yet support this: WP Stagecoach "
+"requires WordPress to be installed in the same directory as your site URL to "
+"run reliably.  Here is the data we found:"
+msgstr ""
+
+#: wpstagecoach.php:807
+msgid "On the General Settings page, the Site Address (URL) is set to: "
+msgstr ""
+
+#: wpstagecoach.php:808
+msgid "The actual URL of your site (in the title bar) is: "
+msgstr ""
+
+#: wpstagecoach.php:809
+msgid ""
+"Your staging site may not display or function properly.  You may proceed at "
+"your own risk."
+msgstr ""
+
+#: wpstagecoach.php:816
+msgid "Check the integrity of your plugin"
+msgstr ""
+
+#: wpstagecoach.php:822
+msgid "Check the size of directories on your site"
+msgstr ""
+
+#: wpstagecoach.php:831
+msgid ""
+"<h4>Displaying absolutely all the changes retrieved from your staging site</"
+"h4>"
+msgstr ""
+
+#: wpstagecoach.php:898
+msgid "<h4>Checking the integrity of your plugin files</h4>"
+msgstr ""
+
+#: wpstagecoach.php:934
+msgid "The checksum for the file "
+msgstr ""
+
+#: wpstagecoach.php:934
+msgid " does not match what is in the official plugin at WP Stagecoach.</br>"
+msgstr ""
+
+#: wpstagecoach.php:940
+msgid ""
+"Please try to download a new version of the plugin if you are experiencing "
+"problems."
+msgstr ""
+
+#: wpstagecoach.php:943
+msgid "Great! All the files' checksums in your plugin match the official ones!"
+msgstr ""
+
+#: wpstagecoach.php:946
+msgid "We could not retrieve the checksum information for this plugin."
+msgstr ""
+
+#: wpstagecoach.php:1002 wpstagecoach.php:1095
+msgid "Permission error"
+msgstr ""
+
+#: wpstagecoach.php:1104
+msgid ""
+"We couldn't determine some basic information for your staging site.  Please "
+"refresh this page and try again."
+msgstr ""
+
+#: wpstagecoach.php:1150
+msgid "No file changes were found."
+msgstr ""
+
+#: wpstagecoach.php:1169
+msgid "Please refresh this page to try again."
+msgstr ""
