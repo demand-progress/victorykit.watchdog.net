@@ -1,6 +1,9 @@
 .htaccess
 wp-config.php
 wp-content/uploads
+wp-content/cache
+wp-content/backups
+wp-content/ai1wm-backups
 
 # Packages #
 ############
