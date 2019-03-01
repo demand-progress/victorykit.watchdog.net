@@ -276,7 +276,7 @@ if( isset($_POST['wpsc-step']) && $_POST['wpsc-step'] == 2 ){
 		$normal=false;
 		$nextstep = 2;
 
-		$errmsg = '<p>' . __( 'Error: the changes file appears to be corrupt! Would you like to try to download it again?', 'wpstagecoach' ) . '</p>'.PHP_EOL;
+		$errmsg = '<p>' . __( 'Error: the changes file doesn\'t appear to have finished downloading. Would you like to try to download it again?', 'wpstagecoach' ) . '</p>'.PHP_EOL;
 		if( WPSC_DEBUG ){
 			$errmsg .= 'DEBUG: The checksum we calculated for your download: ' . $md5sum . '<br/>' . PHP_EOL;
 			$errmsg .= 'DEBUG: The checksum calculated on the server: ' . file_get_contents( $dest_file ) . '<br/>' . PHP_EOL;

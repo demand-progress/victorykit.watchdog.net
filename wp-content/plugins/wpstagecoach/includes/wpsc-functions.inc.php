@@ -3,6 +3,11 @@
  * WP Stagecoach Version 1.4.0
  */
 
+define( 'WPSTAGECOACH_LARGE_FILE',			10485760 );
+define( 'WPSTAGECOACH_ROWS_PER_REFRESH',	1000 );
+
+
+
 if ( ! defined('ABSPATH') ) {
 	die('Please do not load this file directly.');
 }
@@ -529,8 +534,7 @@ function wpsc_display_create_form($domain, $message, $wpsc, $again=''){
 	</div>
 
 	<?php 
-	if( isset( $wpsc['subscription'] ) && strpos( $wpsc['subscription'], 'single-site' ) === false ){
-		if( strpos($new_site_name, 'localhost') !== false || (!empty($wpsc['advanced']) && $wpsc['advanced'] == true) ){
+		if( strpos( $new_site_name, 'localhost' ) !== false || ( ! empty( $wpsc['advanced'] ) && true == $wpsc['advanced'] ) ){
 			if( strpos($new_site_name, 'localhost') !== false ) {
 				_e( '<p>It looks like your live site is running on your local machine. To make your images visible to the internet, you must select the checkbox below.</p>', 'wpstagecoach' );
 			} ?>
@@ -544,12 +548,49 @@ function wpsc_display_create_form($domain, $message, $wpsc, $again=''){
 			</span>
 		</p>
 	<?php
+		}
+	?>
+
+
+
+
+		<?php  // pop up a message if the site is running an old version of PHP, or they have advanced options set.
+		$phpversion = phpversion();
+		if( version_compare( $phpversion, '7.0', '<' ) || ( ! empty( $wpsc['advanced'] ) && true == $wpsc['advanced'] ) ){
+			if( version_compare( $phpversion, '7.0', '<' ) ) {
+			// if( version_compare( $old_ver, '5.4', '=<' ) ) {
+				$label = sprintf( __( 'Your site uses PHP version %s.  <a href="https://wordpress.org/about/requirements/" target="_blank">WordPress recommends version 7.2 or greater.</a><br/>Select the version on your staging site: ', 'wpstagecoach' ), $phpversion );
+			} else {
+				$label = sprintf( __( 'Your site uses PHP version %s.<br/>Select the version on your staging site: ', 'wpstagecoach' ), $phpversion );
 			}
-		} elseif( isset( $wpsc['subscription'] ) && strpos( $wpsc['subscription'], 'single-site' ) !== false ) { // we have a single-site
-			if( !isset( $wpsc['single-site'] ) || empty( $wpsc['single-site'] ) ){
-				echo '<div class="wpstagecoach-warn"><p>' . __('Your subscription only lets you use WP Stagecoach on a single URL - ', 'wpstagecoach' ) ;
-				echo '' . sprintf( __('clicking "Ride the Stagecoach!" will permanently link this URL (%s) to your API key.', 'wpstagecoach' ), preg_replace('#https?://#', '', site_url() ) ) . '</p></div><br/>';
-			}
+		?>
+
+		<p>
+			<label for="php-version"><?php echo $label; ?></label>
+			
+
+			<select id="php-version" name="wpsc-options[php-ver]" />&nbsp;
+
+			<?php
+			global $wpdb;
+			if( 0 <= version_compare( $wpdb->db_version(), '5.5' )  ){
+				echo '<option value="53"' . ( version_compare( phpversion(), '5.3', '>=' ) ? 'selected' : '') . '>PHP 5.3</option>';
+			} ?>
+				<option value="54" <?php echo ( version_compare( phpversion(), '5.4', '>=' ) ? 'selected' : ''); ?>>PHP 5.4</option>
+				<option value="55" <?php echo ( version_compare( phpversion(), '5.5', '>=' ) ? 'selected' : ''); ?>>PHP 5.5</option>
+				<option value="56" <?php echo ( version_compare( phpversion(), '5.6', '>=' ) ? 'selected' : ''); ?>>PHP 5.6</option>
+				<option value="70" <?php echo ( version_compare( phpversion(), '7.0', '>=' ) ? 'selected' : ''); ?>>PHP 7.0</option>
+				<option value="71" <?php echo ( version_compare( phpversion(), '7.1', '>=' ) ? 'selected' : ''); ?>>PHP 7.1</option>
+				<option value="72" <?php echo ( version_compare( phpversion(), '7.2', '>=' ) ? 'selected' : ''); ?>>PHP 7.2</option>
+			</select>
+
+			<a href="#" class="tooltip"><i class="dashicons dashicons-info"></i><span class="open"><b></b>You can create a staging site with an alternative version of PHP to test how your site behaves on different versions of PHP.</span></a>
+			<span class="hotlink more-info" style="display: none;">
+				<?php _e( 'You can specify which version of the PHP you want your staging site to have.', 'wpstagecoach' ); ?>
+			</span>
+
+		</p>
+	<?php
 		}
 	?>
 
@@ -841,7 +882,7 @@ function wpsc_display_error( $msg, $display_header=false, $error_type='error' ){
 } // end wpsc_display_error()
 
 function wpsc_sanity_check( $type='' ){
-	if( ! $wpsc_sanity = get_transient('wpstagecoach_sanity') ){
+	if( ! $wpsc_sanity = get_transient( 'wpstagecoach_sanity' ) ){
 		$wpsc_sanity = array();
 
 		global $wpsc;
@@ -899,8 +940,13 @@ function wpsc_sanity_check( $type='' ){
 
 		// check if the upload_path or upload_dir_path are set, or UPLOADS is defined in wp-config.php
 		$wpsc_sanity['upload_path'] = wpsc_check_upload_path();
+
 		//	check free disk space
-		$wpsc_sanity['disk_space'] = @disk_free_space('.'); 
+		if( function_exists( 'disk_free_space' ) ){
+			$wpsc_sanity['disk_space'] = @disk_free_space('.'); 
+		} else {
+			$wpsc_sanity['disk_space'] = 4294967296;
+		}
 		if( !wpsc_display_disk_space_warning( $wpsc_sanity['disk_space'] ) ){
 			delete_transient('wpstagecoach_sanity');
 			return false;
@@ -934,14 +980,15 @@ function wpsc_sanity_check( $type='' ){
 			return false;
 		}
 
-
 		// in case the live site has forgotten there is a staging site, we'll remind it.
-		if( isset($wpsc_sanity['auth']['stage-site']) ){
-			if( !isset($wpsc['staging-site']) ){
-				$wpsc['staging-site'] = $wpsc_sanity['auth']['stage-site'];
-				$wpsc['live-site'] = $wpsc_sanity['auth']['live-site'];
-				update_option('wpstagecoach', $wpsc);
-			}
+		if( isset( $wpsc_sanity['auth']['stage-site'] ) && ! isset( $wpsc['staging-site'] ) ){
+			$wpsc['staging-site'] = $wpsc_sanity['auth']['stage-site'];
+			$wpsc['live-site'] = $wpsc_sanity['auth']['live-site'];
+			update_option('wpstagecoach', $wpsc);
+		} elseif( isset( $wpsc['staging-site'] ) && ! isset( $wpsc_sanity['auth']['stage-site'] )  ) {
+			unset( $wpsc['staging-site'] );
+			unset( $wpsc['live-site'] );
+			update_option('wpstagecoach', $wpsc);
 		}
 
 		//	check if "get_option(siteurl) == siteurl"
@@ -976,13 +1023,13 @@ function wpsc_sanity_check( $type='' ){
 		}
 
 		if( false !== $wpsc_sanity['https'] ){  // don't want to say we have sanity if https doesn't work!
-			set_transient('wpstagecoach_sanity',$wpsc_sanity, 120); // 2 minutes
+			set_transient( 'wpstagecoach_sanity', $wpsc_sanity, 120 ); // 2 minutes
 		}
 
 		if( stripos( site_url(), 'https' ) !== false || stripos( get_option('siteurl'), 'https' ) !== false || isset( $_SERVER['HTTPS'] ) ){
 			$wpsc['is-https'] = true;
 		}
-		update_option('wpstagecoach', $wpsc);
+		update_option( 'wpstagecoach', $wpsc );
 
 		$wpsc_has_sqlite = wpstagecoach_quick_sqlite3_test();
 		if( is_array( $wpsc_has_sqlite ) && isset( $wpsc_has_sqlite['sqlt-create'] ) && 1 == $wpsc_has_sqlite['sqlt-create'] ){
@@ -1507,9 +1554,20 @@ function wpsc_recursive_unserialize_replace( $live_site, $stage_site, $live_path
 		return NULL;
 	} else {
 		if ( is_string( $data ) ){
-			$data = str_replace( $live_path, $stage_path, $data );
-			$data = str_replace( $live_site, $stage_site, $data );
-		}
+			if( false !== stripos( $data, $live_path ) ){
+				$data = str_replace( $live_path, $stage_path, $data );
+			}
+			if( false !== stripos( $data, $live_site ) ){
+				$data = str_replace( $live_site, $stage_site, $data );
+
+				if( false !== stripos( $data, '.' . $stage_site ) ){
+					$data = str_replace( '.' . $stage_site, '.' . $live_site, $data );
+					}
+				if( false !== stripos( $data, '@' . $stage_site ) ){
+					$data = str_replace( '@' . $stage_site, '@' . $live_site, $data );
+				}
+			} // end of live_site matching data
+		} // end of is_string data
 	}
 	if ( $serialised ){
 		return serialize( $data );

@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (C) 2014-2018 ServMask Inc.
+ * Copyright (C) 2014-2019 ServMask Inc.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -36,13 +36,13 @@ class Ai1wm_Backups {
 		// Iterate over directory
 		$iterator = new Ai1wm_Recursive_Directory_Iterator( AI1WM_BACKUPS_PATH );
 
+		// Filter by extensions
+		$iterator = new Ai1wm_Recursive_Extension_Filter( $iterator, array( 'wpress' ) );
+
 		// Recursively iterate over directory
-		$iterator = new RecursiveIteratorIterator( $iterator, RecursiveIteratorIterator::CHILD_FIRST, RecursiveIteratorIterator::CATCH_GET_CHILD );
-		$iterator->setMaxDepth( 3 );
+		$iterator = new Ai1wm_Recursive_Iterator_Iterator( $iterator, RecursiveIteratorIterator::LEAVES_ONLY, RecursiveIteratorIterator::CATCH_GET_CHILD );
 
 		// Get backup files
-		$iterator = new Ai1wm_Extension_Filter( $iterator, array( 'wpress', 'bin' ) );
-
 		foreach ( $iterator as $item ) {
 			try {
 				if ( ai1wm_is_filesize_supported( $item->getPathname() ) ) {

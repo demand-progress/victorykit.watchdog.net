@@ -253,4 +253,259 @@ jQuery('document').ready( function ($) {
         }
     });
 
+
+
+
+
+
+
+    var step = $( '#wpsc-import-step' ).val();
+    if( typeof step  !== 'undefined' ){
+        if( 6 == step ){
+            // do_file_import();
+            // do_db_import();
+            do_ajax_import();
+        }
+    }
+
+
+    function do_ajax_import() {
+        var url = wpstagecoachajax.ajaxurl; 
+        var nonce = $('#wpsc-do-import-nonce').val();
+        var data = {
+            'action': 'wpstagecoach_do_ajax_import',
+            'nonce': nonce,
+        };
+
+
+// console.log( '_-_-_-_-_-_ doing import _-_-_-_-_-_' );
+// console.log( '_-_-_-_-_-_  _-_-_-_-_-_' );
+
+
+        $.post( url, data, function ( response ) {
+console.log('response: ');
+console.log(response);
+            try{
+                responseobj = JSON.parse( response );
+            } catch( e ) {
+                $('#database_import_results').append( '<div class="wpstagecoach-error">'+response+'</div>' );
+                do_ajax_import();
+                return;
+            }
+
+        // responseobj = JSON.parse( response );
+
+console.log(responseobj);
+console.log('/response');
+
+console.log( '_-_-_-_-_-_ doing '+responseobj.type+' import _-_-_-_-_-_' );
+
+
+
+
+
+/*
+thoughts...
+rather than leaving
+file:
+Imported 32 files. 0 file remaining.
+database:
+Imported 91 rows. 0 rows remaining.
+
+
+It would be nice to write a hidden div/p in the import file that JS un-hides when it is "done" with a particular funciton
+
+
+
+
+*/
+
+
+
+console.log( '_-_-_-_-_-_ '+responseobj.type+' import is "'+responseobj.status+'" _-_-_-_-_-_' );
+// console.log( 'log TESTTESTTESTTEST log' );
+// $('#database_import_results').html('html TESTTESTTESTTEST html' );
+
+            if( responseobj ) {
+                if( 'error' == responseobj.status ) {
+// console.log( 'log TESTTESTTESTTEST log' );
+                    if( typeof responseobj.type  === 'undefined' ){
+                        responseobj.type = 'file_import_results, #database';
+                    }
+
+                    $('#'+responseobj.type+'_import_results').append('<div class="wpstagecoach-error">We encountered an error. Please contact support with the following message:<br />' + responseobj.message + '</div>' );
+                // } else if( responseobj.error == true ){
+// console.log( '_-_-_-_-_-_ what the heck? _-_-_-_-_-_' );
+// console.log(responseobj);
+
+// $("#"+responseobj.'database'+"_import_results").html(total);
+
+                    $('#database_import_results').append('<div class="wpstagecoach-error">We encountered an error. Please contact support with the following message:<br />' + responseobj.message + '</div>' );
+                    // $("#database_import_results").append('We didn\'t get a valid response. Please contact support');
+                   throw new Error();
+
+                } else if( 'finished' == responseobj.status ) {
+                    var success = 'Finshed importing '+responseobj.type;
+                    $("#"+responseobj.type+"_import_results").html(success);
+
+
+                } else {
+                    $("#working-on").html(responseobj.last);
+                    $('#database_import_results').append('<div class="wpstagecoach-error">We encountered an error. Please contact support with the following message:<br />' + responseobj.message + '</div>' );
+
+                    // console.log('continue');
+                    if( responseobj.type == 'database' ){
+                        if( responseobj.rowsleft == 0 ){
+                            var total = 'Finished importing the database.';
+                        } else {
+                            var total = 'Imported ' + responseobj.count + ' rows. ' + responseobj.rowsleft + ' rows remaining.';
+                        }
+                    } else {
+                        if( responseobj.rowsleft == 0 ){
+                            var total = 'Finished importing the files.';
+                        } else {
+                            var total = 'Imported ' + responseobj.count + ' files. ' + responseobj.rowsleft + ' file remaining.';
+                        }
+                    }
+
+                    // var total = 'Updated ' + responseobj.count + ' of ' + $('#working-on').val() + ' database rows';
+                    $("#"+responseobj.type+"_import_results").html(total);
+                    do_ajax_import();
+                }
+            } else {
+                $("#"+responseobj.type+"_import_results").html('We didn\'t get a valid response. Please contact support');
+                throw new Error();
+            } // end of if responseobj
+
+        });
+    } // end of function do_import
+
+
+
+
+
+
+
+
+
+
+
+    /*
+    
+    function do_db_import() {
+        var url = wpstagecoachajax.ajaxurl; // this tells the function to be ajaxy
+        var nonce = $('#wpsc-do-import-nonce').val();
+        var data = {
+            'action': 'wpstagecoach_do_db_import',
+            'nonce': nonce,
+        };
+
+
+console.log( '_-_-_-_-_-_ doing DB import _-_-_-_-_-_' );
+
+
+        $.post( url, data, function ( response ) {
+
+console.log('response: ');
+// console.log(response);
+responseobj = JSON.parse( response );
+
+console.log(responseobj);
+console.log('/response');
+
+console.log( '_-_-_-_-_-_ doing DB import _-_-_-_-_-_' );
+
+
+            if( responseobj ) {
+                if( 'error' == responseobj.status ) {
+                    $("#import_results").html('<div class="wpstagecoach-error">We encountered an error. Please contact support with the following message:<br />' + responseobj.message + '</div>' );
+                } else if( 'finished' == responseobj.status ) {
+                    var success = 'All done';
+                    $("#import_results").html(success);
+                } else {
+$("#working-on").html(responseobj.last);
+
+                    console.log('continue');
+                    var total = 'Imported ' + responseobj.count + ' rows. ' + responseobj.rowsleft + ' rows remaining.';
+                    // var total = 'Updated ' + responseobj.count + ' of ' + $('#working-on').val() + ' database rows';
+                    $("#import_results").html(total);
+// throw new Error('omgbbq');
+                    do_db_import();
+                }
+            } else {
+                $("#import_results").html('We didn\'t get a valid response. Please contact support');
+console.log('omgwtfbbq.');
+throw new Error();
+
+
+            } // end of if responseobj
+
+        });
+    }   
+
+
+
+
+    
+    function do_file_import() {
+        var url = wpstagecoachajax.ajaxurl; // this tells the function to be ajaxy
+        var nonce = $('#wpsc-do-import-nonce').val();
+        var data = {
+            'action': 'wpstagecoach_do_file_import',
+            'nonce': nonce,
+        };
+console.log( '_-_-_-_-_-_ doing File import _-_-_-_-_-_' );
+
+        $.post( url, data, function ( response ) {
+
+console.log('response: ');
+// console.log(response);
+responseobj = JSON.parse( response );
+
+console.log(responseobj);
+console.log('/response');
+
+
+
+            if( responseobj ) {
+                if( 'error' == responseobj.status ) {
+                    $("#import_results").html('<div class="wpstagecoach-error">We encountered an error. Please contact support with the following message:<br />' + responseobj.message + '</div>' );
+                } else if( 'finished' == responseobj.status ) {
+                    var success = 'All done';
+                    $("#import_results").html(success);
+                } else {
+$("#working-on").html(responseobj.last);
+
+                    console.log('continue');
+                    var total = 'Imported ' + responseobj.count + ' rows. ' + responseobj.rowsleft + ' rows remaining.';
+                    // var total = 'Updated ' + responseobj.count + ' of ' + $('#working-on').val() + ' database rows';
+                    $("#import_results").html(total);
+// throw new Error('omgbbq');
+                    do_file_import();
+                }
+            } else {
+                $("#import_results").html('We didn\'t get a valid response. Please contact support');
+console.log('omgwtfbbq.');
+throw new Error();
+
+
+            } // end of if responseobj
+
+        });
+    }   
+
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
 });

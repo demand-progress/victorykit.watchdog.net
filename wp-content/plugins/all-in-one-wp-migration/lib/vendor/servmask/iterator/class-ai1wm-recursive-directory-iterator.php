@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (C) 2014-2018 ServMask Inc.
+ * Copyright (C) 2014-2019 ServMask Inc.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,8 +24,6 @@
  */
 
 class Ai1wm_Recursive_Directory_Iterator extends RecursiveDirectoryIterator {
-
-	protected $exclude = array();
 
 	public function __construct( $path ) {
 		parent::__construct( $path );

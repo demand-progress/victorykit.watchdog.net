@@ -4,14 +4,14 @@
 Plugin Name: WP Stagecoach
 Plugin URI: https://wpstagecoach.com/
 Description: WordPress staging sites made easy
-Version: 1.4.0
+Version: 1.4.3
 Author: WP Stagecoach
 Author URI: https://wpstagecoach.com/
 License: GPL2
 */
 
 /*
-Copyright 2017 Alchemy Computer Solutions, Inc.
+Copyright 2018 Alchemy Computer Solutions, Inc.
 
 This file is part of the WP Stagecoach plugin.
 
@@ -37,11 +37,11 @@ define( 'WPSTAGECOACH_INCLUDES_DIR',		dirname( __FILE__ ) . '/includes' );
 define( 'WPSTAGECOACH_REL_DIR',				str_replace( site_url(), '.', WPSTAGECOACH_PLUGIN_URL ) );
 define( 'WPSTAGECOACH_REL_TEMP_DIR',		WPSTAGECOACH_REL_DIR . 'temp/' );
 define( 'WPSTAGECOACH_TEMP_DIR',			dirname( __FILE__ ).'/'.'temp/' );
-define( 'WPSTAGECOACH_VERSION',				'1.4.0' );
+define( 'WPSTAGECOACH_VERSION',				'1.4.3' );
 define( 'WPSTAGECOACH_CONDUCTOR',			'https://conductor.wpstagecoach.com' );
 define( 'WPSTAGECOACH_ERRDIV',				'<div class="wpstagecoach-error">' );
 define( 'WPSTAGECOACH_WARNDIV',				'<div class="wpstagecoach-warn">' );
-define( 'WPSTAGECOACH_LARGE_FILE',			10485760);
+// define( 'WPSTAGECOACH_LARGE_FILE',			10485760);
 
 /* What to do when the plugin is activated? */
 register_activation_hook( __FILE__,'wpstagecoach_install' );
@@ -84,20 +84,20 @@ function wpstagecoach_admin_menu() {
 
 	$wpsc = get_option( 'wpstagecoach' );
 
-	add_action('load-'.$wpscmainpage, 'wpstagecoach_admin_scripts');
-	if( isset($wpsc['staging-site']) && !empty($wpsc['staging-site']) ) {
-		$wpscimportpage = add_submenu_page('wpstagecoach', 'WP Stagecoach Import', 'Import Changes', 'manage_options', 'wpstagecoach_import', 'wpstagecoach_import');
-		add_action('load-'.$wpscimportpage, 'wpstagecoach_admin_scripts');
+	add_action( 'load-'.$wpscmainpage, 'wpstagecoach_admin_scripts' );
+	if( isset( $wpsc['staging-site'] ) && ! empty( $wpsc['staging-site'] ) ) {
+		$wpscimportpage = add_submenu_page( 'wpstagecoach', 'WP Stagecoach Import', 'Import Changes', 'manage_options', 'wpstagecoach_import', 'wpstagecoach_import' );
+		add_action( 'load-'.$wpscimportpage, 'wpstagecoach_admin_scripts' );
 	}
-	$wpscsettingspage = add_submenu_page('wpstagecoach', 'WP Stagecoach Settings', 'Settings', 'manage_options', 'wpstagecoach_settings', 'wpstagecoach_settings');
-	add_action('load-'.$wpscsettingspage, 'wpstagecoach_admin_scripts');
-	if( isset($wpsc['advanced']) && $wpsc['advanced'] ==  true ) {
-		$wpscdebugpage = add_submenu_page('wpstagecoach', 'WP Stagecoach Advanced', 'Advanced', 'manage_options', 'wpstagecoach_advanced', 'wpstagecoach_advanced');
-		add_action('load-'.$wpscdebugpage, 'wpstagecoach_admin_scripts');
+	$wpscsettingspage = add_submenu_page( 'wpstagecoach', 'WP Stagecoach Settings', 'Settings', 'manage_options', 'wpstagecoach_settings', 'wpstagecoach_settings' );
+	add_action( 'load-'.$wpscsettingspage, 'wpstagecoach_admin_scripts' );
+	if( isset( $wpsc['advanced'] ) && $wpsc['advanced'] ==  true ) {
+		$wpscdebugpage = add_submenu_page( 'wpstagecoach', 'WP Stagecoach Advanced', 'Advanced', 'manage_options', 'wpstagecoach_advanced', 'wpstagecoach_advanced' );
+		add_action( 'load-'.$wpscdebugpage, 'wpstagecoach_admin_scripts' );
 	}
-	if( isset($wpsc['debug']) && $wpsc['debug'] ==  true ) {
-		$wpscdebugpage = add_submenu_page('wpstagecoach', 'WP Stagecoach Debug', 'Debug', 'manage_options', 'wpstagecoach_debug', 'wpstagecoach_debug');
-		add_action('load-'.$wpscdebugpage, 'wpstagecoach_admin_scripts');
+	if( isset( $wpsc['debug'] ) && $wpsc['debug'] ==  true ) {
+		$wpscdebugpage = add_submenu_page( 'wpstagecoach', 'WP Stagecoach Debug', 'Debug', 'manage_options', 'wpstagecoach_debug', 'wpstagecoach_debug' );
+		add_action( 'load-'.$wpscdebugpage, 'wpstagecoach_admin_scripts' );
 	}
 }
 add_action('admin_menu', 'wpstagecoach_admin_menu');
@@ -204,7 +204,7 @@ function wpstagecoach_main() {
 
 
 	// display the create-a-staging-site form
-	if( empty($_POST) || ( isset( $display_main_form ) && $display_main_form == true ) ){
+	if( empty( $_POST ) || ( isset( $display_main_form ) && $display_main_form == true ) ){
 		wpsc_display_sidebar();
 
 		wpsc_display_welcome( $wpsc_sanity['auth'] );
@@ -1332,7 +1332,7 @@ function wpsc_manual_import_ajax() {
 
 	);
 
-	if( !empty( $_POST['wpsc-options'] ) ){
+	if( ! empty( $_POST['wpsc-options'] ) ){
 		$post_details['wpsc-options'] = $_POST['wpsc-options'];
 	}
 
@@ -1376,7 +1376,7 @@ function wpsc_manual_import_ajax() {
 			}
 		}
 		update_option( 'wpstagecoach', $wpsc );
-		die($output);
+		die( $output );
 	} else {
 		$errmsg  = '<p>' . __( 'There was a problem checking for changes on your staging site ', 'wpstagecoach' ) .  '.</p>';
 		$errmsg .= '<p>' . __( 'Please contact WP Stagecoach support with this error information:', 'wpstagecoach' ) . '<pre>';
@@ -1400,3 +1400,707 @@ function wpstagecoach_update_step_nonce() {
 	die( $result );
 }
 add_action( 'wp_ajax_wpstagecoach_update_step_nonce', 'wpstagecoach_update_step_nonce');
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+######  ######
+#     # #     #
+#     # #     #
+#     # ######
+#     # #     #
+#     # #     #
+######  ######
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function wpstagecoach_do_db_import() {
+	require_once( WPSTAGECOACH_INCLUDES_DIR . '/wpsc-functions.inc.php' );
+
+	// verify nonce
+
+
+	$wpsc = get_option( 'wpstagecoach' );
+	if( ! isset( $wpsc['rows_per_refresh'] ) && ! empty( $wpsc['rows_per_refresh'] ) ){
+		$rows_per_refresh = $wpsc['rows_per_refresh'];
+	} else {
+		$rows_per_refresh = WPSTAGECOACH_ROWS_PER_REFRESH;
+	}
+
+	// $return_val['status'] = 'finished';
+	// $return_val['type'] = 'database';
+	// die( json_encode( $return_val ) ); // return this to JS
+
+
+	$rows_per_refresh = 100;
+
+
+		$changesdb = wpstagecoach_open_changes_file();
+		$query = 'SELECT count(*) FROM wpstagecoach_database_imports WHERE processed="selected";';
+		$result = $changesdb->query( $query );
+		$row = $result->fetchArray( SQLITE3_ASSOC );
+		$return_val['rowsleft'] = $row['count(*)'];
+
+
+
+
+
+
+		$query = 'SELECT id,command FROM wpstagecoach_database_imports WHERE processed="selected" LIMIT ' . $rows_per_refresh . ';';
+		if( ! $result = $changesdb->query( $query ) ){
+			$errmsg .= 'We encountered an error with the SQLite database: "' . $changesdb->lastErrorMsg . '"<br/>';
+			$errmsg .= 'Query: ' . $query . '<br/>';
+
+			$return_val['status'] = 'error';
+			$return_val['message'] = $errmsg;
+
+			die( json_encode( $return_val ) );
+		}
+
+		$count = 0;
+		while( $row = $result->fetchArray( SQLITE3_ASSOC ) ) {
+			if( 0 == $count ){
+				$first_row = $row['id'];
+			}
+			// $wpdb->query( $row['command'] );
+			$processed_query = 'UPDATE wpstagecoach_database_imports set processed="processed ' . $import_time . '" where id=' . $row['id'];
+			$processed_result = $changesdb->exec( $processed_query );
+
+			if( $changesdb->lastErrorCode() ){
+				$errmsg .= 'Could not update the SQLite database to reflect the moved file "' . $file . '".<br/>';
+				$errmsg .= 'We received the following error: ' . $changesdb->lastErrorMsg();
+				break;
+			}
+
+			$count++;
+			if( $rows_per_refresh == $count ){
+				$last_row = $row['id'];
+			}
+		} // end of while over $import_db
+		$result->finalize();
+
+
+		$return_val['first'] = $first_row;
+		$return_val['last'] = $last_row;
+		$return_val['count'] = $count;
+
+		if( $count != $rows_per_refresh ){
+			$return_val['status'] = 'finished';
+		} else {
+			$return_val['status'] = 'continue';
+		}
+
+
+
+
+	die( json_encode( $return_val ) ); // return this to JS
+	if( 0 ){
+
+
+		// verify nonce
+
+		// grab the latest finished row from the database
+
+
+			$start_row = get_option( 'wpstagecoach_import_last_row' );
+
+
+		// echo '<br/>start row: '.$start_row . '<br/>';
+		// 
+
+		// do the import
+
+			for ( $i = 0; $i < $rows_per_refresh; $i++ ) { 
+				// echo  $start_row + $i . ' ';
+				// echo  $start_row + $i . '<br/>';
+			}
+			$end_row = $start_row + $rows_per_refresh;
+			// echo  'i: '.  $i . '<br/>';
+
+			// echo   '<br/>';
+
+		// save the latest finished row to the database
+
+		// echo '<br/>end row: '.$end_row . '<br/>';
+			update_option( 'wpstagecoach_import_last_row', ($end_row + 1) );
+
+
+			if( $end_row > 400 ){
+				$result = 'finished';
+			} else {
+				// $result = intval( $end_row );
+				$result = $end_row;
+			}
+
+
+		// echo $result;
+		// $result = 'finished';
+		// $result = intval( '500' );
+		// $result = 500;
+
+		// $result = array();
+		// $result['status'] = 'good';
+		// $result['lastrow'] = $end_row;
+		// $result = json_encode( $result );
+
+
+		die( (string) $result );
+
+
+
+
+
+			if( everything_went_smoothly() && we_still_have_more_to_do() ) {
+				$result = intval( $latest_finished_row );
+			} elseif( everything_went_smoothly() && we_are_all_done() ) {
+				$result = 'finished';
+			} else {
+				$result = 'error';
+			}
+
+
+		  die( $result );
+} // end if( 0 )
+
+}
+add_action( 'wp_ajax_wpstagecoach_do_db_import', 'wpstagecoach_do_db_import' );
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ ######     #    #       ######
+ #          #    #       #
+ #####      #    #       #####
+ #          #    #       #
+ #          #    #       #
+ #          #    ######  ######
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function wpstagecoach_do_file_import() {
+	require_once( WPSTAGECOACH_INCLUDES_DIR . '/wpsc-functions.inc.php' );
+
+		global $flog;
+	// verify nonce
+	$emailmsg='';
+			$continue = false;
+
+
+
+
+
+
+
+
+		$wpsc = get_option( 'wpstagecoach' );
+		if( ! isset( $wpsc['rows_per_refresh'] ) && ! empty( $wpsc['rows_per_refresh'] ) ){
+			$rows_per_refresh = $wpsc['rows_per_refresh'];
+		} else {
+			$rows_per_refresh = WPSTAGECOACH_ROWS_PER_REFRESH;
+		}
+
+	// $return_val['status'] = 'finished';
+	// die( json_encode( $return_val ) ); // return this to JS
+
+
+	$rows_per_refresh = 100;
+
+	// DB: id, file_action, file_name, processed
+
+		$changesdb = wpstagecoach_open_changes_file();
+		$query = 'SELECT count(*) FROM wpstagecoach_file_imports WHERE processed="selected";';
+		$result = $changesdb->query( $query );
+		$row = $result->fetchArray( SQLITE3_ASSOC );
+		$return_val['rowsleft'] = $row['count(*)'];
+		$result->finalize();
+
+
+			if( LOG ) fwrite( $flog, 'starting work on file changes' . PHP_EOL );
+	$emailmsg .= 'starting work on file changes' . PHP_EOL ;
+
+
+			foreach ( array( 'new', 'modified', 'deleted' ) as $action_type ){
+				if( LOG  ) fwrite( $flog, 'Working on ' . $action_type . ' files.' . PHP_EOL );
+	$emailmsg .= 'Working on ' . $action_type . ' files' . PHP_EOL ;
+
+				// check if we have any selected files for a given action
+				// $query = 'SELECT id,command FROM wpstagecoach_files_imports WHERE processed="selected" LIMIT ' . $rows_per_refresh . ';';
+				$query =  'SELECT COUNT(*) as count FROM wpstagecoach_file_imports WHERE processed="selected" and file_action="' . $action_type . '";';
+				$result = $changesdb->query( $query );
+				$num_rows = $result->fetchArray( SQLITE3_ASSOC );
+				$result->finalize();
+	$emailmsg .= 'query ' . $query . PHP_EOL;
+	$emailmsg .= 'num_rows ' . print_r( $num_rows, true ) . PHP_EOL;
+
+				if( $num_rows['count'] < 1 ){
+					continue;
+				}
+
+
+
+				$query =  'SELECT id,file_name FROM wpstagecoach_file_imports WHERE processed="selected" and file_action="' . $action_type . '" LIMIT ' . $rows_per_refresh . ';';
+
+				if( ! $result = $changesdb->query( $query ) ){
+	$emailmsg .= 'We encountered an error with the SQLite database: "' . $changesdb->lastErrorMsg . '"' . PHP_EOL;
+					$errmsg .= 'We encountered an error with the SQLite database: "' . $changesdb->lastErrorMsg . '"<br/>';
+					$errmsg .= 'Query: ' . $query . '<br/>';
+
+					$return_val['status'] = 'error';
+					$return_val['message'] = $errmsg;
+
+					die( json_encode( $return_val ) );
+				}
+
+				$count = 0;
+	$emailmsg .= 'id ';
+				while( $row = $result->fetchArray( SQLITE3_ASSOC ) ) {
+	$emailmsg .= $row['id'] . ', ';
+					if( 0 == $count ){
+						$first_row = $row['id'];
+					}
+					// $wpdb->query( $row['command'] );
+					$processed_query = 'UPDATE wpstagecoach_file_imports set processed="processed ' . $import_time . '" where id=' . $row['id'];
+					$processed_result = $changesdb->exec( $processed_query );
+					if( $changesdb->lastErrorCode() ){
+	$emailmsg .= PHP_EOL.PHP_EOL. 'Could not update the SQLite database to reflect the moved file "' . $file . '".' . PHP_EOL;
+						$errmsg .= 'Could not update the SQLite database to reflect the moved file "' . $file . '".<br/>';
+						$errmsg .= 'We received the following error: ' . $changesdb->lastErrorMsg();
+						break;
+					}
+
+					$count++;
+					if( $rows_per_refresh == $count ){
+						$last_row = $row['id'];
+					}
+				} // end of while over "selected" rows within the limit
+	$emailmsg .= PHP_EOL.PHP_EOL;
+				$result->finalize();
+				$return_val['rowsleft'] = $return_val['rowsleft'] - $count;
+
+
+
+				// if( $count < $rows_per_refresh ){
+				if( $count > 0 ){  // if we've already done some imports, we need to break out
+					$continue = true;
+					break;
+				}
+
+			} // end of foreach over new, modified, deleted
+
+
+	$return_val['type'] = 'files';
+		$return_val['first'] = $first_row;
+		$return_val['last'] = $last_row;
+		$return_val['count'] = $count;
+
+		if( $count == $rows_per_refresh || true == $continue ){
+			$return_val['status'] = 'continue';
+		} else {
+			$return_val['status'] = 'finished';
+		}
+
+	$emailmsg .= 'count ' . $count . PHP_EOL;
+	$emailmsg .= 'rows_per_refresh ' . $rows_per_refresh . PHP_EOL;
+	$emailmsg .= 'return_val ' . print_r( $return_val, true ) . PHP_EOL;
+
+
+
+	// mail( 'jpk@alchemycs.com' , 'do_file_import ran: ' . $count,
+	// 		'wtf!' . PHP_EOL . date() . PHP_EOL . $emailmsg
+	// 	);
+
+
+		die( json_encode( $return_val ) ); // return this to JS
+
+}
+add_action( 'wp_ajax_wpstagecoach_do_file_import', 'wpstagecoach_do_file_import' );
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   ##         #    ##    #    #
+  #  #        #   #  #    #  #
+ #    #       #  #    #    ##
+ ######       #  ######    ##
+ #    #  #    #  #    #   #  #
+ #    #   ####   #    #  #    #
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function wpstagecoach_do_ajax_import(){
+	require_once( WPSTAGECOACH_INCLUDES_DIR . '/wpsc-functions.inc.php' );
+
+	// do logging if enabled
+	if(LOG){
+		$logname = WPSTAGECOACH_TEMP_DIR . 'import.log';
+		$flog = fopen($logname, 'a');
+	}
+
+
+
+
+// verify nonce
+
+
+
+
+
+// $errmsg .= __( 'TESTING ' ) . '</p>'.PHP_EOL;
+// $return_val['message'] = $errmsg;
+// $return_val['status'] = 'error';
+// die( json_encode( $return_val ) ); // return this to JS
+
+
+
+	$wpsc = get_option( 'wpstagecoach' );
+	if( ! isset( $wpsc['rows_per_refresh'] ) && ! empty( $wpsc['rows_per_refresh'] ) ){
+		$rows_per_refresh = $wpsc['rows_per_refresh'];
+	} else {
+		$rows_per_refresh = WPSTAGECOACH_ROWS_PER_REFRESH;
+	}
+
+// $return_val['status'] = 'finished';
+// die( json_encode( $return_val ) ); // return this to JS
+
+
+$rows_per_refresh = 100;
+
+// DB: id, file_action, file_name, processed
+
+	$changesdb = wpstagecoach_open_changes_file();
+	// $query = 'SELECT count(*) FROM wpstagecoach_file_imports WHERE processed="selected";';
+	// $result = $changesdb->query( $query );
+	// $row = $result->fetchArray( SQLITE3_ASSOC );
+	// $return_val['rowsleft'] = $row['count(*)'];
+	// $result->finalize();
+
+
+		// if( LOG ) fwrite( $flog, 'starting work on file changes' . PHP_EOL );
+
+		$continue = false;
+		foreach ( array( 'new', 'modified', 'deleted', 'db' ) as $action_type ){
+			if( LOG ) fwrite( $flog, 'Working on ' . $action_type . ' files.' . PHP_EOL );
+
+			switch ( $action_type ) {
+				case 'new':
+				case 'modified':
+				case 'deleted':
+					$count_query =  'SELECT COUNT(*) as num_selected FROM wpstagecoach_file_imports WHERE processed="selected" and file_action="' . $action_type . '";';
+					$selected_query =  'SELECT id,file_name FROM wpstagecoach_file_imports WHERE processed="selected" and file_action="' . $action_type . '" LIMIT ' . $rows_per_refresh . ';';
+					break;
+
+				case 'db':
+					global $wpdb;
+					$count_query =  'SELECT COUNT(*) as num_selected FROM wpstagecoach_database_imports WHERE processed="selected";';
+					$selected_query = 'SELECT id,command FROM wpstagecoach_database_imports WHERE processed="selected" LIMIT ' . $rows_per_refresh . ';';
+					break;
+			}
+
+			$result = $changesdb->query( $count_query );
+			$row = $result->fetchArray( SQLITE3_ASSOC );
+			$return_val['rowsleft'] = $row['num_selected'];
+
+			$result->finalize();
+
+			if( $return_val['rowsleft'] < 1 ){
+				continue;
+			}
+
+
+
+
+
+			if( ! $result = $changesdb->query( $selected_query ) ){
+				$errmsg .= 'We encountered an error with the SQLite database: "' . $changesdb->lastErrorMsg . '"<br/>';
+				$errmsg .= 'Query: ' . $selected_query . '<br/>';
+				$return_val['status'] = 'error';
+				$return_val['message'] = $errmsg;
+				die( json_encode( $return_val ) );
+			}
+
+			$count = 0;
+			while( $row = $result->fetchArray( SQLITE3_ASSOC ) ) {
+				if( 0 == $count ){
+					$first_row = $row['id'];
+				}
+
+
+				switch ( $action_type ) {
+					case 'new':
+					case 'modified':
+					case 'deleted':
+						$processed_query = 'UPDATE wpstagecoach_file_imports set processed="processed ' . $import_time . '" where id=' . $row['id'];
+						$return_val['type'] = 'file';
+						chdir( get_home_path() );  // need to get into the root directory of the site
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+						$file = $row['file_name'];
+						if( LOG ) fwrite( $flog, 'working on ' . $file . ' -- it is ' . $action_type . '<br/>'.PHP_EOL );
+
+						echo str_pad( '', 65536 ) . PHP_EOL;
+						ob_flush();
+						flush();
+
+
+						// check if the file we're going to move is actually still in the extract directory. shouldn't have to do this, but it has come up.
+						if( ( $action_type == 'new' || $action_type == 'modified' ) &&
+							! is_file( WPSTAGECOACH_TEMP_DIR . 'extract/' . $file )
+						){
+							$badfile = WPSTAGECOACH_TEMP_DIR . 'extract/' . $file;
+							$errmsg .= '<p>' . sprintf( __( 'Whoa! The %s file %s, which we just extracted, does not appear to be there.', 'wpstagecoach' ), $action_type, $badfile ).PHP_EOL;
+							$errmsg .= __( 'Something strange is happening in the filesystem! WP Stagecoach will not continue importing because it will lead to unexpected results.', 'wpstagecoach' ) . '<br/>';
+							$errmsg .= __( 'Please write down exactly what happened, and what you did before you got this error message, and contact <a href="https://wpstagecoach.com/support" target="_blank">WP Stagecoach support</a> with the information.', 'wpstagecoach' ) . '</p>'.PHP_EOL;
+							$return_val['message'] = $errmsg;
+							$return_val['status'] = 'error';
+
+							die( json_encode( $return_val ) ); // return this to JS
+						}
+
+
+						// re-set these each cycle
+						$move_new = false;
+						$rename_old = false;
+
+						//  set what file actions we need to perform below
+						if( 'new' == $action_type ){
+							if( file_exists( $file ) ){
+								// change file_action to modified
+								$processed_query = 'UPDATE wpstagecoach_file_imports set file_action="modified" where id=' . $row['id'];
+								$processed_result = $changesdb->exec( $processed_query );
+								if( $changesdb->lastErrorCode() ){
+									$normal = false;
+									$errmsg .= 'Could not update the SQLite database to reflect the change in file_action for "' . $file . '".<br/>';
+									$errmsg .= 'We received the following error: ' . $changesdb->lastErrorMsg();
+									$return_val['message'] = $errmsg;
+									$return_val['status'] = 'error';
+									die( json_encode( $return_val ) ); // return this to JS
+								}
+							} else {
+								$move_new = true;
+							}
+
+						} elseif( 'modified' == $action_type ){
+							if( ! file_exists( $file ) ){
+								// change file_action to new, and then just move it
+								$processed_query = 'UPDATE wpstagecoach_file_imports set file_action="new" where id=' . $row['id'];
+								$processed_result = $changesdb->exec( $processed_query );
+								if( $changesdb->lastErrorCode() ){
+									$normal = false;
+									$errmsg .= 'Could not update the SQLite database to reflect the change in file_action for "' . $file . '".<br/>';
+									$errmsg .= 'We received the following error: ' . $changesdb->lastErrorMsg();
+									$return_val['message'] = $errmsg;
+									$return_val['status'] = 'error';
+									die( json_encode( $return_val ) ); // return this to JS
+								}
+								$move_new = true;
+							} else {
+								$move_new = true;
+								$rename_old = true;
+							}
+
+						} elseif( 'deleted' == $action_type ){
+							if( ! file_exists( $file ) ){
+								// change file_action to already deleted & move on
+								$processed_query = 'UPDATE wpstagecoach_file_imports set file_action="already-deleted" where id=' . $row['id'];
+								$processed_result = $changesdb->exec( $processed_query );
+								if( $changesdb->lastErrorCode() ){
+									$normal = false;
+									$errmsg .= 'Could not update the SQLite database to reflect the change in file_action for "' . $file . '".<br/>';
+									$errmsg .= 'We received the following error: ' . $changesdb->lastErrorMsg();
+									$return_val['message'] = $errmsg;
+									$return_val['status'] = 'error';
+									die( json_encode( $return_val ) ); // return this to JS
+								}
+							} else {
+								$rename_old = true;
+							}
+						}
+
+
+						// move away old file
+						if( true == $rename_old ){
+							if( ! rename( $file, $file . '.wpsc_temp' ) ){
+								// couldn't move file - something bad is going on.
+								$errmsg .=  '<p>' . sprintf( __( 'Error: could not move the %s file from "./wp-content/plugins/wpstagecoach/temp/extract/%s" to "./%s".  Please check permissions on this directory: %s', 'wpstagecoach' ), $action_type, $file, $file, dirname($file) ) . '<p>';
+								$normal = false;
+							} elseif( 'deleted' == $action_type ){
+								$processed_query = 'UPDATE wpstagecoach_file_imports set processed="processed ' . $import_time . '" where id=' . $row['id'];
+								$processed_result = $changesdb->exec( $processed_query );
+								if( $changesdb->lastErrorCode() ){
+									$normal = false;
+									$errmsg .= 'Could not update the SQLite database to reflect the change in processed for "' . $file . '".<br/>';
+									$errmsg .= 'We received the following error: ' . $changesdb->lastErrorMsg();
+									$return_val['message'] = $errmsg;
+									$return_val['error'] = true;
+									die( json_encode( $return_val ) ); // return this to JS
+								}
+
+							}
+						}
+
+
+						// move new file into place
+						if( true == $move_new ){
+							// make parent directory if it doesn't exist.
+							$dir = dirname( $file );
+							while( ! is_dir( $dir ) ){
+								$dir_arr[] = $dir;
+								$dir = dirname( $dir );
+							}
+							if( isset( $dir_arr ) && is_array( $dir_arr ) ){
+								sort( $dir_arr );
+								foreach ( $dir_arr as $dir ) {
+									if( WPSC_DEBUG ) echo '<small>NOTICE: creating non-existant directory: ' . $dir . '</small><br/>' . PHP_EOL;
+									mkdir( $dir );
+								}
+								unset( $dir_arr );
+								unset( $dir );
+							}
+
+							// do actual move of new file
+							if( ! rename( WPSTAGECOACH_TEMP_DIR . 'extract/' . $file, $file ) ){
+								// couldn't move file - something bad is going on.
+								$errmsg .=  '<p>' . sprintf( __( 'Error: could not move the %s file from "./wp-content/plugins/wpstagecoach/temp/extract/%s" to "./%s".  Please check permissions on this directory: %s', 'wpstagecoach' ), $action_type, $file, $file, dirname($file) ) . '<p>';
+								$normal = false;
+								if( LOG  ) fwrite($flog, 'Failed moving '.$action_type.' file '.$file.' into '.dirname($file).'.'.PHP_EOL);
+							} else {
+								// update that the file was moved
+								$processed_query = 'UPDATE wpstagecoach_file_imports set processed="processed ' . $import_time . '" where id=' . $row['id'];
+								$processed_result = $changesdb->exec( $processed_query );
+								if( $changesdb->lastErrorCode() ){
+									$normal = false;
+									$errmsg .= 'Could not update the SQLite database to reflect the moved file "' . $file . '".<br/>';
+									$errmsg .= 'We received the following error: ' . $changesdb->lastErrorMsg();
+									$return_val['message'] = $errmsg;
+									$return_val['error'] = true;
+									die( json_encode( $return_val ) ); // return this to JS
+								}
+							}
+
+						}
+						if( ! $normal ){
+							$return_val['message'] = $errmsg;
+							$return_val['status'] = 'error';
+							die( json_encode( $return_val ) ); // return this to JS
+						}
+			
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+						break;
+
+					case 'db':
+						$processed_query = 'UPDATE wpstagecoach_database_imports set processed="processed ' . $import_time . '" where id=' . $row['id'];
+						$return_val['type'] = 'database';
+						// $return_val['message'] = $row['command'] ;
+file_put_contents( '/var/www/coach/website/wp-content/plugins/wpstagecoach/temp/import.log', 'doing command "' . $row['command'] . '" now' . PHP_EOL, FILE_APPEND );
+						// $return_val['message'] = $row['id'] . ' ' ;
+						$return_val['message'] = $row['id'] . ' ' . $wpdb->query( $row['command'] );
+file_put_contents( '/var/www/coach/website/wp-content/plugins/wpstagecoach/temp/import.log', 'return value: "' .$return_val['message']  . '" now' . PHP_EOL, FILE_APPEND );
+
+						break;
+				}
+
+
+
+
+				$processed_result = $changesdb->exec( $processed_query );
+				if( $changesdb->lastErrorCode() ){
+					$errmsg .= 'Could not update the SQLite database to reflect the ' . $action_type . ' file "' . $file . '".<br/>';
+					$errmsg .= 'We received the following error: ' . $changesdb->lastErrorMsg();
+					$return_val['message'] = $errmsg;
+					$return_val['error'] = true;
+					break;
+				}
+
+				$count++;
+				if( $rows_per_refresh == $count ){
+					$last_row = $row['id'];
+				}
+			} // end of while over "selected" rows within the limit
+			$result->finalize();
+			$return_val['rowsleft'] = $return_val['rowsleft'] - $count;
+
+
+
+			// if( $count < $rows_per_refresh ){
+			if( $count > 0 ){  // if we've already done some imports, we need to break out
+				$continue = true;
+				break;
+			}
+
+		} // end of foreach over new, modified, deleted
+
+
+	// $return_val['type'] = $action_type;
+	$return_val['first'] = $first_row;
+	$return_val['last'] = $last_row;
+	$return_val['count'] = $count;
+
+	if( $count == $rows_per_refresh || true == $continue ){
+		$return_val['status'] = 'continue';
+	} else {
+		$return_val['status'] = 'finished';
+	}
+
+
+	die( json_encode( $return_val ) ); // return this to JS
+}
+add_action( 'wp_ajax_wpstagecoach_do_ajax_import', 'wpstagecoach_do_ajax_import' );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

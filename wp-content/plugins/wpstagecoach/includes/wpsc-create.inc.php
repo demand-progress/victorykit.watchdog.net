@@ -1,6 +1,6 @@
 <?php
 /*
- * WP Stagecoach Version 1.4.0
+ * WP Stagecoach Version 1.4.3
  */
 
 if ( ! defined('ABSPATH') ) {
@@ -19,9 +19,9 @@ define( 'WPSTAGECOACH_TAR_NOGZ_FILE', WPSTAGECOACH_TEMP_DIR . WPSTAGECOACH_STAGE
 
 global $BINARY_FILE_LIST;
 if( isset($_POST['wpsc-options']['no-hotlink']) && $_POST['wpsc-options']['no-hotlink'] == true ){	
-	$BINARY_FILE_LIST = '';
+	$BINARY_FILE_LIST = '\.webp$';
 } else {
-	$BINARY_FILE_LIST = '\.jpg$|\.jpeg$|\.png$|\.gif$|\.svg$|\.bmp$|\.tif$|\.tiff$|\.pct$|\.pdf$|\.git$|\.mp3$|\.mp4$|\.m4a$|\.aac$|\.aif$|\.mov$|\.qt$|\.mpg$|\.mpeg$|\.wmv$|\.mkv$|\.avi$|\.mpa$|\.ra$|\.rm$|\.swf$|\.avi$|\.mpg$|\.mpeg$|\.flv$|\.swf$|\.gz$|\.sql$|\.tar$|\.log$|\.db$|\.123$|\.zip$|\.rar$|\.iso$|\.vcd$|\.toast$|\.bin$|\.hqx$|\.sit$|\.bak$|\.old$|\.psd$|\.psp$|\.ps$|\.ai$|\.rtf$|\.wps$|\.wpd$|\.dll$|\.exe$|\.wks$|\.msg$|\.mdb$|\.xls$|\.doc$|\.ppt$|\.xlsx$|\.docx$|\.pptx$|\.core$';
+	$BINARY_FILE_LIST = '\.jpg$|\.jpeg$|\.png$|\.gif$|\.svg$|\.bmp$|\.tif$|\.tiff$|\.pct$|\.pdf$|\.git$|\.mp3$|\.mp4$|\.m4a$|\.aac$|\.aif$|\.mov$|\.qt$|\.mpg$|\.mpeg$|\.wmv$|\.mkv$|\.avi$|\.mpa$|\.ra$|\.rm$|\.swf$|\.avi$|\.mpg$|\.mpeg$|\.flv$|\.swf$|\.gz$|\.sql$|\.tar$|\.log$|\.db$|\.123$|\.zip$|\.rar$|\.iso$|\.vcd$|\.toast$|\.bin$|\.hqx$|\.sit$|\.bak$|\.old$|\.psd$|\.psp$|\.ps$|\.ai$|\.rtf$|\.wps$|\.wpd$|\.dll$|\.exe$|\.wks$|\.msg$|\.mdb$|\.xls$|\.doc$|\.ppt$|\.xlsx$|\.docx$|\.pptx$|\.core$|\.webm$|\.webp$|^php_errorlog$';
 }
 
 if( isset( $_POST['wpsc-options']['password-protect-user'] ) && empty( $_POST['wpsc-options']['password-protect-user'] ) ){
@@ -200,7 +200,11 @@ if( $_POST['wpsc-step'] == 1 ){
 	if( WPSC_DEBUG ) fwrite( $create_log, '$create_debug_log[\'sanity\'][\'initial_post_options\'] = json_decode( \'' . json_encode( $post_options ) . '\', true );' . PHP_EOL);
 
 	if( defined( 'DB_CHARSET' ) ){
-		$post_options['charset'] = DB_CHARSET;
+		if( ! empty( DB_CHARSET ) ){
+			$post_options['charset'] = DB_CHARSET;
+		} else {
+			$post_options['charset'] = 'EMPTY';
+		}
 	} else {
 		$post_options['charset'] = 'NA';
 	}
@@ -244,12 +248,9 @@ if( $_POST['wpsc-step'] == 1 ){
 		'body' => $post_details
 	);
 
-
 	if( WPSC_DEBUG ){
 		fwrite( $create_log, '$create_debug_log[\'step' . $_POST['wpsc-step'] . '\'][\'sanity_post\'] = json_decode( \'' . json_encode( $post_details ) . '\', true );' . PHP_EOL);
 	}
-
-
 
 	// do some SSL sanity
 	if( !isset($wpsc_sanity['https']) ){
@@ -262,8 +263,6 @@ if( $_POST['wpsc-step'] == 1 ){
 	}
 
 
-
-	
 	$post_result = wp_remote_post($post_url, $post_args );
 	$result = wpsc_check_post_info('check_if_site_exists', $post_url, $post_details, $post_result, false) ; // check response from the server
 
@@ -430,7 +429,7 @@ if( isset($_POST['wpsc-step']) && $_POST['wpsc-step'] == 2 ){
 
 
 	// check for valid charset
-	if( ! defined( 'DB_CHARSET' ) && true == $first_step){
+	if( ! ( defined( 'DB_CHARSET' ) || empty( DB_CHARSET ) ) && true == $first_step){
 
 		$char_tables = $wpdb->get_results('SHOW tables', ARRAY_N);
 
@@ -501,7 +500,7 @@ if( isset($_POST['wpsc-step']) && $_POST['wpsc-step'] == 2 ){
 	} else {
 		$rows_per_step = 100000;
 	}
-	if( WPSC_DEBUG ) echo '&nbsp;&nbsp;' . __( 'Rows per step: ', 'wpstagecoach' )  . number_format( $rows_per_step ) . '<br/>' . PHP_EOL;
+	if( WPSC_DEBUG ) echo '&nbsp;&nbsp;' . __( 'Total rows per step: ', 'wpstagecoach' )  . number_format( $rows_per_step ) . '<br/>' . PHP_EOL;
 
 
 
@@ -775,7 +774,7 @@ if( isset($_POST['wpsc-step']) && $_POST['wpsc-step'] == 2 ){
 
 
 
-		echo '&nbsp;&nbsp;' . sprintf( __( 'dumping table %s, with %d rows.', 'wpstagecoach' ), $table, $num_rows ) . '<br/>' . PHP_EOL;
+		echo '&nbsp;&nbsp;&nbsp;&nbsp;' . sprintf( __( 'Working on table "%s", it has %d rows.', 'wpstagecoach' ), $table, $num_rows ) . '<br/>' . PHP_EOL;
 		echo str_pad( '', 65536 ) . PHP_EOL;
 		ob_flush();
 		flush();
@@ -785,18 +784,19 @@ if( isset($_POST['wpsc-step']) && $_POST['wpsc-step'] == 2 ){
 		$rows_left = $num_rows;
 		while( ! $done ){
 
-
-
 			// get each row
 			$query = $query_base . ' ' . $curr_row . ', ' . $rows_from_mysql . ';';
 			$res = mysqli_query( $db, $query );
 
 			if( $num_rows > 0 ){
+				if( WPSC_DEBUG ) echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . sprintf( __( 'starting table %s on %d, with %d rows left.', 'wpstagecoach' ), $table, $curr_row, $rows_left ) . '<br/>' . PHP_EOL;
 				$i=0;
 				while ( $i < $rows_from_mysql && $i < $rows_left ) {
 					$table_dump .= 'INSERT INTO `' . $table . '` VALUES ';
 					$j=0;
+					if( WPSC_DEBUG ) echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . __( 'New insert statement.  Start row: ', 'wpstagecoach' ) . ( $i + 1 ) ;
 					while ( ( $j < $num_of_iterations && $j < $rows_left ) && ( $i < $rows_from_mysql && $i < $rows_left ) ) { 
+						// if( WPSC_DEBUG ) echo $i . ', ';
 
 						$row = mysqli_fetch_row( $res );
 						if( ! is_array( $row ) ){
@@ -841,7 +841,7 @@ if( isset($_POST['wpsc-step']) && $_POST['wpsc-step'] == 2 ){
 						$i++;
 						$j++;
 					} // end for $j < $num_of_iterations
-
+					if( WPSC_DEBUG ) echo ' End: ' . $i . '<br/>' . PHP_EOL;
 
 					$table_dump[ strlen($table_dump)-1 ] = ';';  // replace last ',' w/ ';'
 					$table_dump .= PHP_EOL;
@@ -905,7 +905,6 @@ if( isset($_POST['wpsc-step']) && $_POST['wpsc-step'] == 2 ){
 	} elseif( function_exists( 'gzclose64' ) ){
 		gzclose64($db_fh);
 	}
-
 } // end of step 2
 
 ################################################################################################################################
@@ -1067,7 +1066,8 @@ if( isset($_POST['wpsc-step']) && $_POST['wpsc-step'] == 3 ){
 		
 	} else {
 		$nextstep = 5;
-		if( ! $df = @disk_free_space(WPSTAGECOACH_TEMP_DIR) ){
+		if( ! function_exists( 'disk_free_space' ) ||
+			! $df = @disk_free_space(WPSTAGECOACH_TEMP_DIR) ){
 			$df = 4294967296;
 		}
 		if( $totalsize > $df ){
@@ -1188,7 +1188,8 @@ if( isset($_POST['wpsc-step']) && $_POST['wpsc-step'] == 4 ){
 
 	}
 
-	if( ! $df = @disk_free_space('.') ){
+	if( ! function_exists( 'disk_free_space' ) ||
+		! $df = @disk_free_space('.') ){
 		$df = 4294967296;
 	}
 	if( $totalsize > $df ){
@@ -2331,7 +2332,7 @@ function wpsc_build_tar_list_rec( $dir, $list, $exclude_list='' ){
 		// we only want to change the dir_list once, after that we want it to run as normal.
 		$slow_server = false;
 	}
-	if( empty( $dir_list ) ){
+	if( empty( $dir_list ) ){ // need to include empty directories
 		$list[] = $dir;
 	} else {
 		foreach( $dir_list as $entry ){
@@ -2341,16 +2342,16 @@ function wpsc_build_tar_list_rec( $dir, $list, $exclude_list='' ){
 				if( !empty( $exclude_list ) && in_array( ltrim( $dir . '/' . $entry, './' ), $exclude_list ) ){
 					continue;
 				}
-				if( empty( $BINARY_FILE_LIST ) ){
+				if( '\.webp$' == $BINARY_FILE_LIST ){
 						if(   is_dir(  $dir . '/' . $entry ) &&
 							! is_link( $dir . '/' . $entry ) && // don't want to actually copy the contents of symlinked dirs
-							! is_file( $dir . '/' . $entry.'/wp-config.php' )  // don't need to archive other sub-WP directories
+							! is_file( $dir . '/' . $entry . '/wp-config.php' )  // don't need to archive other sub-WP directories
 						){
-							if( 'cache' != $entry ){
+							if( 'cache' != $entry || ( 'cache' == $entry && strpos( $dir, 'wp-content/plugins/' ) !== false ) ){
 								$list = wpsc_build_tar_list_rec( $dir . '/' . $entry, $list, $exclude_list );
 							}
 						} elseif ( is_file( $dir . '/' . $entry ) ||
-							(is_link( $dir . '/' . $entry ) && !is_dir( $dir . '/' . $entry )) &&
+							( is_link( $dir . '/' . $entry ) && !is_dir( $dir . '/' . $entry ) ) &&
 							!($dir == 'cache' && strpos($entry, 'timthumb') ) // don't want to copy timthumb caches
 						){
 							$fsize = @filesize( $dir . '/' . $entry );
@@ -2387,7 +2388,7 @@ function wpsc_build_tar_list_rec( $dir, $list, $exclude_list='' ){
 							$dir . '/' . $entry != './' . WPSTAGECOACH_REL_CONTENT . '/uploads/' // not copying uploads dir for now
 
 						){
-							if( 'cache' != $entry ){
+							if( 'cache' != $entry || ( 'cache' == $entry && strpos( $dir, 'wp-content/plugins/' ) !== false ) ){
 								$list = wpsc_build_tar_list_rec( $dir . '/' . $entry, $list, $exclude_list );
 							}
 						} elseif ( is_file( $dir . '/' . $entry ) ||

@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (C) 2014-2018 ServMask Inc.
+ * Copyright (C) 2014-2019 ServMask Inc.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,13 +29,10 @@ class Ai1wm_Export_Config {
 		global $wp_version, $wpdb;
 
 		// Set progress
-		Ai1wm_Status::info( __( 'Adding configuration to archive...', AI1WM_PLUGIN_NAME ) );
+		Ai1wm_Status::info( __( 'Preparing configuration file...', AI1WM_PLUGIN_NAME ) );
 
 		// Get options
 		$options = wp_load_alloptions();
-
-		// Set config
-		$config = array();
 
 		// Get database client
 		if ( empty( $wpdb->use_mysqli ) ) {
@@ -43,6 +40,8 @@ class Ai1wm_Export_Config {
 		} else {
 			$mysql = new Ai1wm_Database_Mysqli( $wpdb );
 		}
+
+		$config = array();
 
 		// Set site URL
 		$config['SiteURL'] = site_url();
@@ -70,7 +69,57 @@ class Ai1wm_Export_Config {
 			}
 		}
 
-		// Set no replace email
+		// Set no spam comments
+		if ( isset( $params['options']['no_spam_comments'] ) ) {
+			$config['NoSpamComments'] = true;
+		}
+
+		// Set no post revisions
+		if ( isset( $params['options']['no_post_revisions'] ) ) {
+			$config['NoPostRevisions'] = true;
+		}
+
+		// Set no media
+		if ( isset( $params['options']['no_media'] ) ) {
+			$config['NoMedia'] = true;
+		}
+
+		// Set no themes
+		if ( isset( $params['options']['no_themes'] ) ) {
+			$config['NoThemes'] = true;
+		}
+
+		// Set no inactive themes
+		if ( isset( $params['options']['no_inactive_themes'] ) ) {
+			$config['NoInactiveThemes'] = true;
+		}
+
+		// Set no must-use plugins
+		if ( isset( $params['options']['no_muplugins'] ) ) {
+			$config['NoMustUsePlugins'] = true;
+		}
+
+		// Set no plugins
+		if ( isset( $params['options']['no_plugins'] ) ) {
+			$config['NoPlugins'] = true;
+		}
+
+		// Set no inactive plugins
+		if ( isset( $params['options']['no_inactive_plugins'] ) ) {
+			$config['NoInactivePlugins'] = true;
+		}
+
+		// Set no cache
+		if ( isset( $params['options']['no_cache'] ) ) {
+			$config['NoCache'] = true;
+		}
+
+		// Set no database
+		if ( isset( $params['options']['no_database'] ) ) {
+			$config['NoDatabase'] = true;
+		}
+
+		// Set no email replace
 		if ( isset( $params['options']['no_email_replace'] ) ) {
 			$config['NoEmailReplace'] = true;
 		}
@@ -101,13 +150,8 @@ class Ai1wm_Export_Config {
 		ai1wm_write( $handle, json_encode( $config ) );
 		ai1wm_close( $handle );
 
-		// Add package.json file
-		$archive = new Ai1wm_Compressor( ai1wm_archive_path( $params ) );
-		$archive->add_file( ai1wm_package_path( $params ), AI1WM_PACKAGE_NAME );
-		$archive->close();
-
 		// Set progress
-		Ai1wm_Status::info( __( 'Done adding configuration to archive.', AI1WM_PLUGIN_NAME ) );
+		Ai1wm_Status::info( __( 'Done preparing configuration file.', AI1WM_PLUGIN_NAME ) );
 
 		return $params;
 	}

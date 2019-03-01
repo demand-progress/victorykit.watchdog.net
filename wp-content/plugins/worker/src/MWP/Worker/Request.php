@@ -54,6 +54,8 @@ class MWP_Worker_Request
      */
     protected $serviceSignatureHeaderName = 'MWP-Service-Signature';
 
+    protected $signatureNoHostHeaderName = 'MWP-Signature-G';
+
     /**
      * Header that contains the communication key.
      * Must be compliant with {@link http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html RFC 2616}
@@ -61,6 +63,8 @@ class MWP_Worker_Request
      * @var string
      */
     protected $communicationKeyHeaderName = 'MWP-Communication-Key';
+
+    protected $siteIdHeaderName = 'MWP-Site-Id';
 
     protected $protocolVersionHeaderName = 'MWP-Protocol';
 
@@ -121,13 +125,13 @@ class MWP_Worker_Request
     private $method;
 
     /**
-     * @param array       $query The GET parameters.
-     * @param array       $request The POST parameters.
+     * @param array       $query      The GET parameters.
+     * @param array       $request    The POST parameters.
      * @param array       $attributes The request attributes.
-     * @param array       $cookies The COOKIE parameters.
-     * @param array       $files The FILES parameters.
-     * @param array       $server The SERVER parameters.
-     * @param null|string $content The raw request body data. If null, it will be lazy-loaded.
+     * @param array       $cookies    The COOKIE parameters.
+     * @param array       $files      The FILES parameters.
+     * @param array       $server     The SERVER parameters.
+     * @param null|string $content    The raw request body data. If null, it will be lazy-loaded.
      */
     public function __construct($query = array(), $request = array(), $attributes = array(), $cookies = array(), $files = array(), $server = array(), $content = null)
     {
@@ -194,7 +198,9 @@ class MWP_Worker_Request
         $this->attributes['signature']         = base64_decode($this->getHeader($this->signatureHeaderName));
         $this->attributes['key_name']          = $this->getHeader($this->keyNameHeaderName);
         $this->attributes['service_signature'] = $this->getHeader($this->serviceSignatureHeaderName);
+        $this->attributes['no_host_signature'] = $this->getHeader($this->signatureNoHostHeaderName);
         $this->attributes['communication_key'] = $this->getHeader($this->communicationKeyHeaderName);
+        $this->attributes['site_id']           = $this->getHeader($this->siteIdHeaderName);
         $this->attributes['data']              = null;
         $this->attributes['params']            = null;
         $this->attributes['setting']           = null;
@@ -204,6 +210,10 @@ class MWP_Worker_Request
 
         if (!empty($this->attributes['service_signature'])) {
             $this->attributes['service_signature'] = base64_decode($this->attributes['service_signature']);
+        }
+
+        if (!empty($this->attributes['no_host_signature'])) {
+            $this->attributes['no_host_signature'] = base64_decode($this->attributes['no_host_signature']);
         }
 
         // Do we have {"params":{...}} inside of body?
@@ -314,11 +324,27 @@ class MWP_Worker_Request
     }
 
     /**
+     * @return null|string
+     */
+    public function getNoHostSignature()
+    {
+        return $this->attributes['no_host_signature'];
+    }
+
+    /**
      * @return string
      */
     public function getCommunicationKey()
     {
         return !empty($this->attributes['communication_key']) ? $this->attributes['communication_key'] : '';
+    }
+
+    /**
+     * @return string
+     */
+    public function getSiteId()
+    {
+        return !empty($this->attributes['site_id']) ? $this->attributes['site_id'] : '';
     }
 
     /**

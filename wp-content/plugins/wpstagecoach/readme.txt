@@ -2,7 +2,7 @@ ____ WP Stagecoach ____
 Contributors: Jonathan Kay, Morgan Kay
 Tags: staging site
 Requires at least: 3.0.1
-Tested up to: 4.6.1
+Tested up to: 5.0.3
 URL: https://wpstagecoach.com
 
 WordPress staging sites made easy.
@@ -28,6 +28,18 @@ Key features:
 Please see https://wpstagecoach.com/support/instructions/
 
 == Changelog ==
+
+= v1.4.3 =
+* added checks for cache directories included within plugins
+* added .webp to the exclusion list
+* added better compatibility with newer PHP versions
+
+= v1.4.2 =
+* fixed a bug where a staging site notification could get stuck in unusual circumstances
+
+= v1.4.1 =
+* added more checks for hosts that don't have common functions
+* addressed situation where files would sometimes not be processed for import
 
 = v1.4.0 =
 * new method for importing changes

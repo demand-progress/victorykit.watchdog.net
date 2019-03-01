@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (C) 2014-2018 ServMask Inc.
+ * Copyright (C) 2014-2019 ServMask Inc.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,6 +27,20 @@ class Ai1wm_Export_Enumerate {
 
 	public static function execute( $params ) {
 
+		// Get total files count
+		if ( isset( $params['total_files_count'] ) ) {
+			$total_files_count = (int) $params['total_files_count'];
+		} else {
+			$total_files_count = 0;
+		}
+
+		// Get total files size
+		if ( isset( $params['total_files_size'] ) ) {
+			$total_files_size = (int) $params['total_files_size'];
+		} else {
+			$total_files_size = 0;
+		}
+
 		// Set progress
 		Ai1wm_Status::info( __( 'Retrieving a list of all WordPress files...', AI1WM_PLUGIN_NAME ) );
 
@@ -46,7 +60,7 @@ class Ai1wm_Export_Enumerate {
 
 			// Exclude inactive themes
 			if ( isset( $params['options']['no_inactive_themes'] ) ) {
-				foreach ( wp_get_themes() as $theme => $info ) {
+				foreach ( search_theme_directories() as $theme => $info ) {
 					// Exclude current parent and child themes
 					if ( ! in_array( $theme, array( get_template(), get_stylesheet() ) ) ) {
 						$inactive_themes[] = 'themes' . DIRECTORY_SEPARATOR . $theme;
@@ -88,52 +102,28 @@ class Ai1wm_Export_Enumerate {
 			$exclude_filters = array_merge( $exclude_filters, array( 'uploads', 'blogs.dir' ) );
 		}
 
-		// Get total files count
-		if ( isset( $params['total_files_count'] ) ) {
-			$total_files_count = (int) $params['total_files_count'];
-		} else {
-			$total_files_count = 0;
-		}
-
-		// Get total files size
-		if ( isset( $params['total_files_size'] ) ) {
-			$total_files_size = (int) $params['total_files_size'];
-		} else {
-			$total_files_size = 0;
-		}
-
 		// Create map file
 		$filemap = ai1wm_open( ai1wm_filemap_path( $params ), 'w' );
 
-		try {
+		// Iterate over content directory
+		$iterator = new Ai1wm_Recursive_Directory_Iterator( WP_CONTENT_DIR );
 
-			// Iterate over content directory
-			$iterator = new Ai1wm_Recursive_Directory_Iterator( WP_CONTENT_DIR );
+		// Exclude uploads, plugins or themes
+		$iterator = new Ai1wm_Recursive_Exclude_Filter( $iterator, apply_filters( 'ai1wm_exclude_content_from_export', $exclude_filters ) );
 
-			// Exclude new line file names
-			$iterator = new Ai1wm_Recursive_Newline_Filter( $iterator );
+		// Recursively iterate over content directory
+		$iterator = new Ai1wm_Recursive_Iterator_Iterator( $iterator, RecursiveIteratorIterator::LEAVES_ONLY, RecursiveIteratorIterator::CATCH_GET_CHILD );
 
-			// Exclude uploads, plugins or themes
-			$iterator = new Ai1wm_Recursive_Exclude_Filter( $iterator, apply_filters( 'ai1wm_exclude_content_from_export', $exclude_filters ) );
+		// Write path line
+		foreach ( $iterator as $item ) {
+			if ( $item->isFile() ) {
+				if ( ai1wm_write( $filemap, $iterator->getSubPathName() . PHP_EOL ) ) {
+					$total_files_count++;
 
-			// Recursively iterate over content directory
-			$iterator = new RecursiveIteratorIterator( $iterator, RecursiveIteratorIterator::LEAVES_ONLY, RecursiveIteratorIterator::CATCH_GET_CHILD );
-
-			// Write path line
-			foreach ( $iterator as $item ) {
-				if ( $item->isFile() ) {
-					if ( ai1wm_write( $filemap, $iterator->getSubPathName() . PHP_EOL ) ) {
-						$total_files_count++;
-
-						// Add current file size
-						$total_files_size += $iterator->getSize();
-					}
+					// Add current file size
+					$total_files_size += $iterator->getSize();
 				}
 			}
-		} catch ( Ai1wm_Quota_Exceeded_Exception $e ) {
-			throw new Exception( 'Out of disk space.' );
-		} catch ( Exception $e ) {
-			// Skip bad file permissions
 		}
 
 		// Set progress

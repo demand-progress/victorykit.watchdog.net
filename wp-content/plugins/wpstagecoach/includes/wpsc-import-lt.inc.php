@@ -1,6 +1,6 @@
 <?php
 /*
- * WP Stagecoach Version 1.4.0
+ * WP Stagecoach Version 1.4.3
  */
 
 if ( ! defined('ABSPATH') ) {
@@ -63,7 +63,7 @@ if( $_POST['wpsc-step'] != 7 && $_POST['wpsc-step'] != 8 ){
 
 // do logging if enabled
 if(LOG){
-	$logname = WPSTAGECOACH_TEMP_DIR.'import.log';
+	$logname = WPSTAGECOACH_TEMP_DIR . 'import.log';
 
 	if( $_POST['wpsc-step'] == 1 ){
 		if( is_file( $logname ) ){
@@ -73,6 +73,7 @@ if(LOG){
 		fwrite($flog, '--------------------------------------------------------------------------------' . PHP_EOL);
 		fwrite($flog, "starting import on " . date('Y-m-d_H:i') . PHP_EOL);
 		fwrite($flog, '--------------------------------------------------------------------------------' . PHP_EOL);
+		fwrite($flog, PHP_EOL . 'WP Stagecoach version: ' . WPSTAGECOACH_VERSION . PHP_EOL ); 
 		fwrite($flog, PHP_EOL . 'wpsc_sanity: ' . print_r( $wpsc_sanity, true ) . PHP_EOL ); 
 	} else {
 		$flog = fopen($logname, 'a');
@@ -87,7 +88,7 @@ if(LOG){
 		else
 			$posttemp[$key] = $post;
 	}
-	fwrite($flog, PHP_EOL.'step '.$_POST['wpsc-step'].PHP_EOL.'$_POST:'.print_r($posttemp,true).PHP_EOL);
+	fwrite( $flog, PHP_EOL . 'step ' . $_POST['wpsc-step'] . PHP_EOL . '$_POST:' . print_r( $posttemp, true ) . PHP_EOL );
 }
 
 
@@ -128,7 +129,7 @@ $normal=true;
 #	check on whether files/dirs are writable
 if( isset($_POST['wpsc-step']) && $_POST['wpsc-step'] == 1 ){
 	echo '<p>' . __( 'Step 1: loop through changes, store choices, and make sure everything is writable.', 'wpstagecoach' ) . '</p>';
-	$error = false;
+	$error = false; // hope springs eternal.  Also, eternal springs are nice.
 
 	// set some arrays we'll be using later
 	$wpsc_writable_file_test_array = array();	// list of all the files we need to see if are writable
@@ -477,7 +478,7 @@ if( isset($_POST['wpsc-step']) && $_POST['wpsc-step'] == 1 ){
 		echo '<p>' . __( 'No files selected, just database entries, moving onto database imports.', 'wpstagecoach' ) . '</p>';
 		$nextstep = 5;
 	} else { // we have at least file changes selected - we'll check on DB changes later.
-		if( LOG  ) fwrite( $flog, 'Some files were selected.' . PHP_EOL );
+		if( LOG  ) fwrite( $flog, 'Some files (' . $total_number_file_changes . ') were selected.' . PHP_EOL );
 		$nextstep = 2;
 
 
@@ -967,33 +968,47 @@ if( isset($_POST['wpsc-step']) && $_POST['wpsc-step'] == 6 ){
 	flush();
 
 	if( WPSC_DEBUG ) echo 'Import time: ' . $import_time . '<br/>';
+	if( LOG  ) fwrite( $flog, 'Import time: ' . $import_time . PHP_EOL );
+
 
 	$changesdb = wpstagecoach_open_changes_file();
 
 	$query = 'SELECT name FROM sqlite_master WHERE type="table";';
-	$result = $changesdb->query( $query );
-	while ( $row = $result->fetchArray( SQLITE3_ASSOC ) ) {
+	$table_result = $changesdb->query( $query );
+
+	$import_db = 0;
+	$import_files = 0;
+
+	while ( $table_row = $table_result->fetchArray( SQLITE3_ASSOC ) ) {
 		// check table names for items to import
-		if( is_array( $row ) ){
-			if( 'wpstagecoach_database_imports' == $row['name'] ){
-				// check if we actually have database entries to import
-				$query = 'SELECT count(*) FROM wpstagecoach_database_imports WHERE processed="selected";';
-				$result = $changesdb->query( $query );
-				$row = $result->fetchArray( SQLITE3_ASSOC );
-				if( $row['count(*)'] > 0 ){
+		if( is_array( $table_row ) ){
+			if( LOG  ) fwrite( $flog, 'table name: ' . $table_row['name'] . PHP_EOL );
+
+			$query = 'SELECT count(*) FROM ' . $table_row['name'] . ' WHERE processed="selected";';
+			if( LOG  ) fwrite( $flog, '  query: ' . $query . PHP_EOL );
+
+			$result = $changesdb->query( $query );
+			$row = $result->fetchArray( SQLITE3_ASSOC );
+			if( $row['count(*)'] > 0 ){
+				if( LOG  ) fwrite( $flog, '  table ' . $table_row['name'] . ' had selected entries' . PHP_EOL );
+				if( 'wpstagecoach_database_imports' == $table_row['name'] ){
 					$import_db = true;
-				}
-			} elseif( 'wpstagecoach_file_imports' == $row['name'] ){
-				// check if we have file entries to import
-				$query = 'SELECT count(*) FROM wpstagecoach_file_imports WHERE processed="selected";';
-				$result = $changesdb->query( $query );
-				$row = $result->fetchArray( SQLITE3_ASSOC );
-				if( $row['count(*)'] > 0 ){
+				} elseif ( 'wpstagecoach_file_imports' == $table_row['name'] ) {
 					$import_files = true;
 				}
+			} else {
+				if( LOG  ) fwrite( $flog, '  table ' . $table_row['name'] . ' did NOT have any selected entries' . PHP_EOL );
 			}
+
+			if( LOG  ) fwrite( $flog, '  selected ' . $table_row['name'] . ' count: ' . $row['count(*)'] . PHP_EOL );
+		} else {
+			if( LOG  ) fwrite( $flog, 'Error: table check variable "$table_row" is not an array: ' . print_r( $table_row, true ) . PHP_EOL );
 		}
-	}
+	} // end of while
+
+	if( LOG  ) fwrite( $flog, 'Import status: ' . PHP_EOL );
+	if( LOG  ) fwrite( $flog, '  import_files: ' . print_r( $import_files, true ) . PHP_EOL );
+	if( LOG  ) fwrite( $flog, '  import_db: ' . print_r( $import_db, true ) . PHP_EOL );
 
 	if( $import_files ){
 		// move the new files into place
@@ -1149,8 +1164,9 @@ if( isset($_POST['wpsc-step']) && $_POST['wpsc-step'] == 6 ){
 				break;
 			}
 		} // end of foreach over file action_types
+	} else {
+		if( LOG ) fwrite( $flog, 'NOT doing any file changes' . PHP_EOL );
 	} // end of $import_files import
-
 
 	if( ! empty( $errmsg ) ){
 		$msg = '<p>' . __( 'Some files are not in the state WP Stagecoach expected. We have done our best to figure out what needed to happen, but just in case, here is what we found:', 'wpstagecoach' ) . '</p>' .PHP_EOL;
@@ -1159,6 +1175,7 @@ if( isset($_POST['wpsc-step']) && $_POST['wpsc-step'] == 6 ){
 		ob_flush();
 		flush();
 		$normal = false;
+		if( LOG ) fwrite( $flog, 'Error: ran into file state issues.' . PHP_EOL );
 
 		echo '<form method="POST" id="wpsc-files-in-abnormal-state-form" class="wpstagecoach-update-step-nonce-form">'.PHP_EOL;
 
@@ -1181,6 +1198,7 @@ if( isset($_POST['wpsc-step']) && $_POST['wpsc-step'] == 6 ){
 
 	// now we apply all the items from the database.
 	if( $import_db && $normal == true ){
+		if( LOG ) fwrite( $flog, 'starting work on DB changes' . PHP_EOL );
 
 		$query = 'SELECT id,command FROM wpstagecoach_database_imports WHERE processed="selected";';
 		if( ! $result = $changesdb->query( $query ) ){
@@ -1199,6 +1217,8 @@ if( isset($_POST['wpsc-step']) && $_POST['wpsc-step'] == 6 ){
 				break;
 			}
 		} // end of while over $import_db
+	} else {
+		if( LOG ) fwrite( $flog, 'NOT doing any DB changes' . PHP_EOL );
 	} // end of if $import_db
 
 	if( ! empty( $errmsg ) ){

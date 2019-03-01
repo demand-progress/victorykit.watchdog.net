@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (C) 2014-2018 ServMask Inc.
+ * Copyright (C) 2014-2019 ServMask Inc.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@
 class Ai1wm_Report {
 
 	/**
-	 * Submit customer report to ServMask.com
+	 * Submit customer report to servmask.com
 	 *
 	 * @param  string  $email   User e-mail
 	 * @param  string  $message User message
@@ -48,7 +48,8 @@ class Ai1wm_Report {
 			$response = wp_remote_post(
 				AI1WM_REPORT_URL,
 				array(
-					'body' => array(
+					'timeout' => 15,
+					'body'    => array(
 						'email'   => $email,
 						'message' => $message,
 					),

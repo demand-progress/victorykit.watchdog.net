@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (C) 2014-2018 ServMask Inc.
+ * Copyright (C) 2014-2019 ServMask Inc.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,7 +28,10 @@
 	<div class="ai1wm-row">
 		<div class="ai1wm-left">
 			<div class="ai1wm-holder">
-				<h1><i class="ai1wm-icon-export"></i> <?php _e( 'Export Site', AI1WM_PLUGIN_NAME ); ?></h1>
+				<h1>
+					<i class="ai1wm-icon-export"></i>
+					<?php _e( 'Export Site', AI1WM_PLUGIN_NAME ); ?>
+				</h1>
 
 				<?php include AI1WM_TEMPLATES_PATH . '/common/report-problem.php'; ?>
 
@@ -42,11 +45,12 @@
 
 					<?php include AI1WM_TEMPLATES_PATH . '/export/export-buttons.php'; ?>
 
-					<?php do_action( 'ai1wm_export_left_end' ); ?>
-
 					<input type="hidden" name="ai1wm_manual_export" value="1" />
 
 				</form>
+
+				<?php do_action( 'ai1wm_export_left_end' ); ?>
+
 			</div>
 		</div>
 		<div class="ai1wm-right">

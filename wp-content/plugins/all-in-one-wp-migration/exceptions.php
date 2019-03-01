@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (C) 2014-2018 ServMask Inc.
+ * Copyright (C) 2014-2019 ServMask Inc.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -34,8 +34,11 @@ class Ai1wm_Not_Seekable_Exception extends Exception {}
 class Ai1wm_Not_Tellable_Exception extends Exception {}
 class Ai1wm_Not_Readable_Exception extends Exception {}
 class Ai1wm_Not_Writable_Exception extends Exception {}
+class Ai1wm_Not_Truncatable_Exception extends Exception {}
+class Ai1wm_Not_Closable_Exception extends Exception {}
 class Ai1wm_Not_Found_Exception extends Exception {}
 class Ai1wm_Not_Directory_Exception extends Exception {}
 class Ai1wm_Not_Valid_Secret_Key_Exception extends Exception {}
 class Ai1wm_Quota_Exceeded_Exception extends Exception {}
 class Ai1wm_Storage_Exception extends Exception {}
+class Ai1wm_Compatibility_Exception extends Exception {}

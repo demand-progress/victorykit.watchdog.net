@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (C) 2014-2018 ServMask Inc.
+ * Copyright (C) 2014-2019 ServMask Inc.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,23 +24,38 @@
  */
 
 class Ai1wm_File_Htaccess {
+
 	/**
-	 * Create .htaccess file
+	 * Create .htaccess file (ServMask)
 	 *
-	 * The method will create .htaccess file with contents 'AddType application/octet-stream .wpress'
-	 *
-	 * @param string $path Path to the backups directory
+	 * @param  string  $path Path to file
 	 * @return boolean
 	 */
 	public static function create( $path ) {
-		$contents = "<IfModule mod_mime.c>\n" .
-					"AddType application/octet-stream .wpress\n" .
-					"</IfModule>\n" .
-					"<IfModule mod_dir.c>\n" .
-					"DirectoryIndex index.php\n" .
-					"</IfModule>\n" .
-					"Options -Indexes\n";
+		return Ai1wm_File::create( $path, implode( PHP_EOL, array(
+			'<IfModule mod_mime.c>',
+			'AddType application/octet-stream .wpress',
+			'</IfModule>',
+			'<IfModule mod_dir.c>',
+			'DirectoryIndex index.php',
+			'</IfModule>',
+			'<IfModule mod_autoindex.c>',
+			'Options -Indexes',
+			'</IfModule>',
+		) ) );
+	}
 
-		return Ai1wm_File::create( $path, $contents );
+	/**
+	 * Create .htaccess file (LiteSpeed)
+	 *
+	 * @param  string  $path Path to file
+	 * @return boolean
+	 */
+	public static function litespeed( $path ) {
+		return Ai1wm_File::create_with_markers( $path, 'LiteSpeed', array(
+			'<IfModule Litespeed>',
+			'SetEnv noabort 1',
+			'</IfModule>',
+		) );
 	}
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (C) 2014-2018 ServMask Inc.
+ * Copyright (C) 2014-2019 ServMask Inc.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,6 +27,13 @@ class Ai1wm_Export_Content {
 
 	public static function execute( $params ) {
 
+		// Set archive bytes offset
+		if ( isset( $params['archive_bytes_offset'] ) ) {
+			$archive_bytes_offset = (int) $params['archive_bytes_offset'];
+		} else {
+			$archive_bytes_offset = ai1wm_archive_bytes( $params );
+		}
+
 		// Set file bytes offset
 		if ( isset( $params['file_bytes_offset'] ) ) {
 			$file_bytes_offset = (int) $params['file_bytes_offset'];
@@ -41,11 +48,11 @@ class Ai1wm_Export_Content {
 			$filemap_bytes_offset = 0;
 		}
 
-		// Get total files count
-		if ( isset( $params['total_files_count'] ) ) {
-			$total_files_count = (int) $params['total_files_count'];
+		// Get processed files size
+		if ( isset( $params['processed_files_size'] ) ) {
+			$processed_files_size = (int) $params['processed_files_size'];
 		} else {
-			$total_files_count = 1;
+			$processed_files_size = 0;
 		}
 
 		// Get total files size
@@ -55,11 +62,11 @@ class Ai1wm_Export_Content {
 			$total_files_size = 1;
 		}
 
-		// Get processed files size
-		if ( isset( $params['processed_files_size'] ) ) {
-			$processed_files_size = (int) $params['processed_files_size'];
+		// Get total files count
+		if ( isset( $params['total_files_count'] ) ) {
+			$total_files_count = (int) $params['total_files_count'];
 		} else {
-			$processed_files_size = 0;
+			$total_files_count = 1;
 		}
 
 		// What percent of files have we processed?
@@ -80,18 +87,21 @@ class Ai1wm_Export_Content {
 		// Set filemap pointer at the current index
 		if ( fseek( $filemap, $filemap_bytes_offset ) !== -1 ) {
 
-			// Get archive
+			// Open the archive file for writing
 			$archive = new Ai1wm_Compressor( ai1wm_archive_path( $params ) );
+
+			// Set the file pointer to the one that we have saved
+			$archive->set_file_pointer( $archive_bytes_offset );
 
 			// Loop over files
 			while ( $path = trim( fgets( $filemap ) ) ) {
 				$file_bytes_written = 0;
 
 				// Add file to archive
-				if ( ( $completed = $archive->add_file( WP_CONTENT_DIR . DIRECTORY_SEPARATOR . $path, $path, $file_bytes_written, $file_bytes_offset, 10 ) ) ) {
+				if ( ( $completed = $archive->add_file( WP_CONTENT_DIR . DIRECTORY_SEPARATOR . $path, $path, $file_bytes_written, $file_bytes_offset ) ) ) {
 					$file_bytes_offset = 0;
 
-					// Set filemap bytes offset
+					// Get filemap bytes offset
 					$filemap_bytes_offset = ftell( $filemap );
 				}
 
@@ -105,11 +115,19 @@ class Ai1wm_Export_Content {
 				Ai1wm_Status::info( sprintf( __( 'Archiving %d files...<br />%d%% complete', AI1WM_PLUGIN_NAME ), $total_files_count, $progress ) );
 
 				// More than 10 seconds have passed, break and do another request
-				if ( ( microtime( true ) - $start ) > 10 ) {
-					$completed = false;
-					break;
+				if ( ( $timeout = apply_filters( 'ai1wm_completed_timeout', 10 ) ) ) {
+					if ( ( microtime( true ) - $start ) > $timeout ) {
+						$completed = false;
+						break;
+					}
 				}
 			}
+
+			// Get archive bytes offset
+			$archive_bytes_offset = $archive->get_file_pointer();
+
+			// Truncate the archive file
+			$archive->truncate();
 
 			// Close the archive file
 			$archive->close();
@@ -117,6 +135,9 @@ class Ai1wm_Export_Content {
 
 		// End of the filemap?
 		if ( feof( $filemap ) ) {
+
+			// Unset archive bytes offset
+			unset( $params['archive_bytes_offset'] );
 
 			// Unset file bytes offset
 			unset( $params['file_bytes_offset'] );
@@ -127,10 +148,19 @@ class Ai1wm_Export_Content {
 			// Unset processed files size
 			unset( $params['processed_files_size'] );
 
+			// Unset total files size
+			unset( $params['total_files_size'] );
+
+			// Unset total files count
+			unset( $params['total_files_count'] );
+
 			// Unset completed flag
 			unset( $params['completed'] );
 
 		} else {
+
+			// Set archive bytes offset
+			$params['archive_bytes_offset'] = $archive_bytes_offset;
 
 			// Set file bytes offset
 			$params['file_bytes_offset'] = $file_bytes_offset;
@@ -140,6 +170,12 @@ class Ai1wm_Export_Content {
 
 			// Set processed files size
 			$params['processed_files_size'] = $processed_files_size;
+
+			// Set total files size
+			$params['total_files_size'] = $total_files_size;
+
+			// Set total files count
+			$params['total_files_count'] = $total_files_count;
 
 			// Set completed flag
 			$params['completed'] = $completed;
